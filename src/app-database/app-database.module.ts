@@ -6,14 +6,14 @@ import { ConfigService } from '@nestjs/config';
   imports: [
     MongooseModule.forRootAsync({
       useFactory: async (configService: ConfigService) => {
-        const dbConfig = configService.get('db');
+        // const dbConfig = configService.get('db');
         return {
-          uri: dbConfig.url,
-          replicaSet: dbConfig.replicaSet,
+          uri: 'mongodb://localhost/void',
+          // replicaSet: dbConfig.replicaSet,
         };
       },
       inject: [ConfigService],
     }),
   ],
 })
-export class DatabaseModule {}
+export class AppDatabaseModule {}
