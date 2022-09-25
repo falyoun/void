@@ -1,0 +1,67 @@
+useAuth:
+  useCookies:
+    expiration: 14400000
+  useAccessToken:
+    expiration: 4h
+  useRefreshToken:
+    expiration: 2d
+generatedTokenConfig:
+  registrationToken:
+    expiration: 5d
+  forgotPasswordToken:
+    expiration: 24h
+organizationInvitationAuth:
+  useAccessToken:
+    expiration: 5d
+  callbackUrl: https://api.pemo.io/api/v1/accept-invitation
+mandrill:
+  fromEmail: no-reply@pemo.io
+  fromName: pemo
+server:
+  port: 3000
+  throttle:
+    ttl: 10
+    limit: 100
+  apiPrefix: api/v1
+  swagger:
+    title: Pemo
+    description: Pemo apis for integration with Open-Banking
+    version: 1.0
+    api: /api
+database:
+  autoLoadModels: true
+  synchronize: true
+  dialect: postgres
+  sync:
+    force: false
+  define:
+    underscored: true
+    paranoid: true
+    timestamps: true
+    freezeTableName: false
+  pool:
+    min: 2
+    max: 10
+cmsUrls:
+  forgotPassword: 'https://app.pemo.io/auth/reset-password'
+  registrationInvitation: 'https://app.pemo.io/auth/complete-business-info'
+  acceptInvitation: 'https://app.pemo.io/auth/accept-invitation'
+pedant:
+  baseUrl: 'https://api.pedant.ai'
+  uploadFileEndpoint: '/external/upload-file'
+s3:
+  bucket: media-pemo-prod
+sesLambdaHash: '@Lambda123!'
+swiftcodesapi:
+  appKey: sk_c11439de84de3efa5dae842cbe8517124ca7878f9f8bd5cdca20eebd024ff01e
+communicationEmails:
+  invoiceLink: 'https://$$$.pemo.io/invoice'
+  failedInvoiceLink: 'https://$$$.pemo.io/invoices-management/invoices'
+  logo: 'https://media-pemo-prod.s3.eu-west-1.amazonaws.com/pemo.png'
+quickbooks:
+  sandbox: true
+  debugging: false
+  callbackUrl: 'https://api.pemo.io/api/v1/organization-integration/quickbooks-callback'
+  cmsUrl: 'https://$$$.pemo.io/settings/accounting/'
+  integrationToken:
+    expiration: 1h

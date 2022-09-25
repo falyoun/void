@@ -1,0 +1,85 @@
+useAuth:
+  secretKey: M0H@M^D_@BDULR@HM^N_S@MI_@LPH@_JUN0
+  useCookies:
+    expiration: 14400000
+  useAccessToken:
+    expiration: 4h
+  useRefreshToken:
+    expiration: 2d
+generatedTokenConfig:
+  registrationToken:
+    secretKey: M0H@M^D_@BDULR@HM^N_S@MI_@LPH@_JUN0
+    expiration: 5d
+  forgotPasswordToken:
+    secretKey: M0H@M^D_@BDULR@HM^N_S@MI_@LPH@_JUN0
+    expiration: 24h
+organizationInvitationAuth:
+  useAccessToken:
+    expiration: 5d
+  callbackUrl: https://api.demo.pemo.io/api/v1/accept-invitation
+mandrill:
+  apiKey: tp2o2P2YlGvrf_iQu_I06A
+  fromEmail: no-reply@pemo.io
+  fromName: juno
+dapi:
+  appSecret: 51d9b55885dcc6b257a9eb9c46259c5e2fb4305ad8a456e957e18d1b3434a3e2
+  appKey: 88625efd1435612923e8854e135def7bed1810ac3de749322f5dad0d1ca0ccde
+  ddToken:
+server:
+  port: 4000
+  throttle:
+    ttl: 10
+    limit: 100
+  apiPrefix: api/v1
+  swagger:
+    title: Juno
+    description: Juno apis for integration with Open-Banking
+    version: 1.0
+    api: /api
+    useAuth:
+      username: juno
+      password: juno
+database:
+  name: juno_demo
+  autoLoadModels: true
+  synchronize: true
+  dialect: postgres
+  username: alpha_juno
+  password: alphajunodb
+  sync:
+    force: false
+  define:
+    underscored: true
+    paranoid: true
+    timestamps: true
+    freezeTableName: false
+  pool:
+    min: 2
+    max: 10
+cmsUrls:
+  forgotPassword: 'https://app.demo.pemo.io/auth/reset-password'
+  registrationInvitation: 'https://app.demo.pemo.io/auth/complete-business-info'
+  acceptInvitation: 'https://app.demo.pemo.io/auth/accept-invitation'
+pedant:
+  baseUrl: 'https://api.demo.pedant.ai'
+  uploadFileEndpoint: '/external/upload-file'
+  authKey: '849b36b485f95edff695cae50070b72103f9e0c6d35ee832ceb8d9ecf9c3b8fb'
+s3:
+  bucket: media-juno-demo
+sesLambdaHash: '@Lambda123!'
+swiftcodesapi:
+  appKey: sk_c11439de84de3efa5dae842cbe8517124ca7878f9f8bd5cdca20eebd024ff01e
+communicationEmails:
+  invoiceLink: 'https://$$$.demo.pemo.io/invoice'
+  failedInvoiceLink: 'https://$$$.demo.pemo.io/invoices-management/invoices'
+  logo: 'https://media-pemo-prod.s3.eu-west-1.amazonaws.com/pemo.png'
+quickbooks:
+  clientKey: ABu1zX1IwFWFPMfp1Eco2NT9jJpezGrpfziUHk6kSVHKtgCnNg
+  clientSecret: T3xZuux345Uz3nLpjKxPTPgy4aByruol0Q1wGoQJ
+  sandbox: true
+  debugging: false
+  callbackUrl: 'https://api.demo.pemo.io/api/v1/organization-integration/quickbooks-callback'
+  cmsUrl: 'https://$$$.demo.pemo.io/settings/accounting/'
+  integrationToken:
+    secretKey: very_secret_key
+    expiration: 1h

@@ -1,0 +1,77 @@
+useAuth:
+  secretKey: M0H@M^D_@BDULR@HM^N_S@MI_@LPH@_JUN0
+  useCookies:
+    expiration: 14400000
+  useAccessToken:
+    secretKey: M0H@M^D_@BDULR@HM^N_S@MI_@LPH@_JUN0
+    expiration: 15min
+  useRefreshToken:
+    expiration: 2d
+generatedTokenConfig:
+  registrationToken:
+    secretKey: M0H@M^D_@BDULR@HM^N_S@MI_@LPH@_JUN0
+    expiration: 5d
+  forgotPasswordToken:
+    secretKey: M0H@M^D_@BDULR@HM^N_S@MI_@LPH@_JUN0
+    expiration: 1h
+organizationInvitationAuth:
+  useAccessToken:
+    expiration: 5d
+  callbackUrl: https://api.staging.getjuno.io/api/v1/accept-invitation
+mandrill:
+  apiKey: RW3Xw1EXpJl5EqvKlE0MUQ
+  fromEmail: no-reply@pemo.io
+  fromName: Pemo
+server:
+  port: 3000
+  throttle:
+    ttl: 10
+    limit: 100
+  apiPrefix: api/v1
+  swagger:
+    title: Pemo
+    description: Pemo apis for integration with Open-Banking
+    version: 1.0
+    api: /api
+    useAuth:
+      username: juno
+      password: juno
+database:
+  name: juno
+  autoLoadModels: true
+  synchronize: false
+  dialect: postgres
+  username: alpha_juno
+  password: alphajunodb
+  define:
+    underscored: true
+    paranoid: true
+    timestamps: true
+    freezeTableName: false
+  pool:
+    min: 2
+    max: 10
+cmsUrls:
+  forgotPassword: 'https://app.staging.pemo.io/forget-password'
+  registrationInvitation: 'https://app.staging.pemo.io/register-verify'
+  acceptInvitation: 'https://app.staging.pemo.io/auth/accept-invitation'
+pedant:
+  baseUrl: 'https://api.dev.pedant.ai'
+  uploadFileEndpoint: '/external/upload-file'
+  authKey: 'f1d59faffa50bb69b867f35718f3417f91c4eb37643446e6b2cf16c348af255f'
+s3:
+  bucket: media-juno-uat
+sesLambdaHash: '@Lambda123!'
+swiftcodesapi:
+  appKey: sk_c11439de84de3efa5dae842cbe8517124ca7878f9f8bd5cdca20eebd024ff01e
+communicationEmails:
+  invoiceLink: 'https://$$$.staging.pemo.io/invoice'
+  failedInvoiceLink: 'https://$$$.staging.pemo.io/invoices-management/invoices'
+  logo: 'https://media-pemo-prod.s3.eu-west-1.amazonaws.com/pemo.png'
+quickbooks:
+  sandbox: true
+  debugging: false
+  callbackUrl: 'https://api.staging.pemo.io/api/v1/organization-integration/quickbooks-callback'
+  cmsUrl: 'https://$$$.staging.pemo.io/settings/accounting/'
+  integrationToken:
+    expiration: 1h

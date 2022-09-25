@@ -1,0 +1,80 @@
+useAuth:
+  secretKey: M0H@M^D_@BDULR@HM^N_S@MI_@LPH@_JUN0
+  useCookies:
+    expiration: 14400000
+  useAccessToken:
+    secretKey: M0H@M^D_@BDULR@HM^N_S@MI_@LPH@_JUN0
+    expiration: 4h
+  useRefreshToken:
+    expiration: 2d
+generatedTokenConfig:
+  registrationToken:
+    secretKey: M0H@M^D_@BDULR@HM^N_S@MI_@LPH@_JUN0
+    expiration: 5d
+  forgotPasswordToken:
+    secretKey: M0H@M^D_@BDULR@HM^N_S@MI_@LPH@_JUN0
+    expiration: 24h
+organizationInvitationAuth:
+  useAccessToken:
+    expiration: 5d
+  callbackUrl: https://api.uat.pemo.io/api/v1/accept-invitation
+mandrill:
+  apiKey: tp2o2P2YlGvrf_iQu_I06A
+  fromEmail: no-reply@pemo.io
+  fromName: Pemo
+dapi:
+  appSecret: 72e7cf6d2e6978ff00d7e2b5c713c9bf947861007103a7b97c5c5224b8ad4b1a
+  appKey: e29d4077157d1c95709e6e3fc16799851db47eac24698f339160195e74968947
+  ddToken:
+server:
+  port: 3000
+  apiPrefix: api/v1
+  swagger:
+    title: Pemo
+    description: Pemo apis for integration with Open-Banking
+    version: 1.0
+    api: /api
+    useAuth:
+      username: juno
+      password: juno
+database:
+  name: juno_uat
+  autoLoadModels: true
+  synchronize: false
+  dialect: postgres
+  username: alpha_juno
+  password: alphajunodb
+  sync:
+    force: false
+  define:
+    underscored: true
+    paranoid: true
+    timestamps: true
+    freezeTableName: false
+  pool:
+    min: 2
+    max: 10
+cmsUrls:
+  forgotPassword: 'https://app.uat.pemo.io/auth/reset-password'
+  registrationInvitation: 'https://app.uat.pemo.io/auth/complete-business-info'
+  acceptInvitation: 'https://app.uat.pemo.io/auth/accept-invitation'
+padent:
+  baseUrl: 'https://api.demo.pedant.ai'
+  uploadFileEndpoint: '/external/upload-file'
+  authKey: 'f1d59faffa50bb69b867f35718f3417f91c4eb37643446e6b2cf16c348af255f'
+s3:
+  bucket: media-juno-uat
+sesLambdaHash: '@Lambda123!'
+swiftcodesapi:
+  appKey: sk_c11439de84de3efa5dae842cbe8517124ca7878f9f8bd5cdca20eebd024ff01e
+communicationEmails:
+  invoiceLink: 'https://$$$.uat.pemo.io/invoice'
+  failedInvoiceLink: 'https://$$$.uat.pemo.io/invoices-management/invoices'
+  logo: 'https://media-pemo-prod.s3.eu-west-1.amazonaws.com/pemo.png'
+quickbooks:
+  sandbox: true
+  debugging: false
+  callbackUrl: 'https://api.uat.pemo.io/api/v1/organization-integration/quickbooks-callback'
+  cmsUrl: 'https://$$$.uat.pemo.io/settings/accounting/'
+  integrationToken:
+    expiration: 1h
