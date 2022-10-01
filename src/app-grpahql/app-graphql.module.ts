@@ -10,6 +10,7 @@ import { DirectiveLocation, GraphQLDirective } from 'graphql';
       driver: ApolloDriver,
       debug: true,
       playground: true,
+      introspection: true,
       autoSchemaFile: 'schema.gql',
       transformSchema: (schema) => upperDirectiveTransformer(schema, 'upper'),
       sortSchema: true,
