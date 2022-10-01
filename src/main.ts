@@ -5,10 +5,10 @@ import { json, urlencoded } from 'body-parser';
 // import { createNamespace } from 'cls-hooked';
 import cookieParser from 'cookie-parser';
 import { IAppConfig, IServer } from '@app/app-config/app-config.interface';
-import { HttpStatus, ValidationPipe } from '@nestjs/common';
-import { CodedExceptionFilter } from '@app/shared/filters/coded-exception.filter';
-import { AllExceptionsFilter } from '@app/shared/filters/all-exceptions.filter';
-import { ClassValidatorException } from '@app/shared/exceptions/coded-exception';
+// import { HttpStatus, ValidationPipe } from '@nestjs/common';
+// import { CodedExceptionFilter } from '@app/shared/filters/coded-exception.filter';
+// import { AllExceptionsFilter } from '@app/shared/filters/all-exceptions.filter';
+// import { ClassValidatorException } from '@app/shared/exceptions/coded-exception';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
