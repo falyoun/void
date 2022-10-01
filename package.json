@@ -23,8 +23,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "h:logs": "heroku logs --tail",
-    "push:heroku": "git push heroku main"
+    "heroku:logs:": "heroku logs --tail",
+    "heroku:push": "git push heroku main"
   },
   "dependencies": {
     "@nestjs/cli": "^9.1.4",
