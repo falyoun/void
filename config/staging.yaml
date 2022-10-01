@@ -1,3 +1,7 @@
+useGraphQL:
+  playground: true
+useMongoDB:
+  uri:
 useAuth:
   secretKey: M0H@M^D_@BDULR@HM^N_S@MI_@LPH@_JUN0
   useCookies:

@@ -1,18 +1,5 @@
-export interface IDatabase {
-  name: string;
-  dialect: any;
-  host?: string;
-  port?: number;
-  username: string;
-  password: string;
-  autoLoadModels: boolean;
-  synchronize: boolean;
-  define?: any;
-  sync?: any;
-  pool?: {
-    min: number;
-    max: number;
-  };
+export interface IMongoDB {
+  uri: string;
 }
 export interface ISwagger {
   title: string;
@@ -128,7 +115,7 @@ export interface IFastForexConfig {
 }
 
 export interface IAppConfig {
-  database: IDatabase;
+  useMongoDB: IMongoDB;
   dapi: IDapi;
   server: IServer;
   useAuth: IAuth;

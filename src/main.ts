@@ -37,28 +37,28 @@ async function bootstrap() {
   const configService = app.get<ConfigService<IAppConfig>>(ConfigService);
   const serverConfig = configService.get<IServer>('server');
   const { port } = serverConfig;
-  app.useGlobalFilters(new AllExceptionsFilter(), new CodedExceptionFilter());
+  // app.useGlobalFilters(new AllExceptionsFilter(), new CodedExceptionFilter());
   // app.useGlobalInterceptors(new DataResponseInterceptor());
   // app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      exceptionFactory: (errors) => {
-        console.log(errors);
-        return new ClassValidatorException(
-          'CLASS_VALIDATOR',
-          HttpStatus.BAD_REQUEST,
-          `Invalid fields -> (${errors
-            .map((e) => `'${e.property}'`)
-            .join(', ')})`,
-          errors.map((e) => {
-            const { target, children, ...otherProps } = e;
-            return otherProps;
-          }),
-        );
-      },
-    }),
-  );
+  // app.useGlobalPipes(
+  //   new ValidationPipe({
+  //     whitelist: true,
+  //     exceptionFactory: (errors) => {
+  //       console.log(errors);
+  //       return new ClassValidatorException(
+  //         'CLASS_VALIDATOR',
+  //         HttpStatus.BAD_REQUEST,
+  //         `Invalid fields -> (${errors
+  //           .map((e) => `'${e.property}'`)
+  //           .join(', ')})`,
+  //         errors.map((e) => {
+  //           const { target, children, ...otherProps } = e;
+  //           return otherProps;
+  //         }),
+  //       );
+  //     },
+  //   }),
+  // );
   await app.listen(process.env.PORT || port, () => {
     console.log('App is running on port: ', process.env.PORT || port);
   });
