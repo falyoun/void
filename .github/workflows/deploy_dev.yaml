@@ -1,0 +1,188 @@
+# V1.1
+name: Deploy Development Environment
+env:
+  NODE_ENV: development
+  PORT: 3002
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+on:
+  pull_request:
+    types: [closed]
+    branches: ['dev']
+  push:
+    branches:
+      - dev
+
+jobs:
+  checkCommand:
+    runs-on: ubuntu-latest
+    outputs:
+      command-name: ${{ steps.command.outputs.command-name }}
+      command-args: ${{ steps.command.outputs.command-arguments }}
+
+    steps:
+      - name: Check command
+        uses: xt0rted/slash-command-action@v1
+        id: command
+        continue-on-error: true
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          permission-level: write
+          reaction: false
+          command: deploy
+
+  test-lint:
+    name: Test Coverage / Code Lint
+    if: |
+      needs.checkCommand.outputs.command-name == 'deploy' ||
+      (github.event.action == 'labeled' && github.event.label.name == ':rocket: dev') ||
+      (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, ':rocket: dev'))
+    needs: checkCommand
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        if: github.event_name != 'issue_comment'
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: refs/pull/${{ github.event.issue.number }}/merge
+        if: github.event_name == 'issue_comment'
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install Dependencies & Build
+        run: |
+          npm install --global yarn
+          yarn install --frozen-lockfile --production=false --ignore-optional
+          yarn build
+
+      - name: Run Tests
+        run: yarn test:coverage
+
+      - name: Run Lint
+        run: yarn lint
+
+  deploy:
+    name: Deploy dev environment
+    runs-on: self-hosted
+    needs: [checkCommand, test-lint]
+    if: |
+      needs.checkCommand.outputs.command-name == 'deploy' ||
+      (github.event.action == 'labeled' && github.event.label.name == ':rocket: dev') ||
+      (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, ':rocket: dev'))
+    timeout-minutes: 30
+    steps:
+      - name: Debug github context
+        env:
+          PAYLOAD_CONTEXT: ${{ toJson(github) }}
+        run: echo "$PAYLOAD_CONTEXT"
+
+      - name: AWS cli install action
+        uses: chrislennon/action-aws-cli@1.1
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Read secrets from AWS Secrets Manager into environment variables
+        uses: abhilash1in/aws-secrets-manager-action@v1.1.0
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+          secrets: |
+            VOID_APP_DEV
+          parse-json: true
+
+      - name: Check if env variable is set after fetching secrets
+        run: if [ -z ${VOID_APP_DEV} ]; then echo "VOID_APP_DEV is unset"; else echo "VOID_APP_DEV is set to 'VOID_APP_DEV'"; fi
+
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: install aws-iam-authenticator
+        uses: Woofenator/action-aws-iam-authenticator@1.0.4
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+        if: github.event_name != 'issue_comment'
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: refs/pull/${{ github.event.issue.number }}/merge
+        if: github.event_name == 'issue_comment'
+
+      - name: Set environment variables from arguments
+        if: needs.checkCommand.outputs.command-args
+        uses: actions/github-script@v5.0.0
+        env:
+          COMMAMND_ARGS: ${{ needs.checkCommand.outputs.command-args }}
+        with:
+          script: |
+            const args = process.env.COMMAMND_ARGS.split(' ')
+            if (args && args.length) {
+              args.forEach(arg => {
+                const argValue = arg.split('=')
+                if (argValue && argValue.length) {
+                  core.exportVariable(argValue[0], argValue[1]);
+                }
+              })
+            }
+
+      - name: Set current date as env variable
+        run: echo "CURRENT_DATE=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
+
+      - name: Set branch name
+        run: echo "BRANCH_NAME=$GITHUB_REF" >> $GITHUB_ENV
+
+      - name: Set commit
+        run: echo "COMMIT_SHA=$GITHUB_SHA" >> $GITHUB_ENV
+
+      - name: Define variables
+        run: |
+          pr_id=${{ github.event.issue.number || github.event.number }}
+          repository_name=${{ github.event.repository.name }}
+          brand_name="void-api"
+          dev_domain=${brand_name}-${pr_id}.ae
+          echo DEV_DOMAIN=${dev_domain} >> $GITHUB_ENV
+          echo PR_ID=${pr_id} >> $GITHUB_ENV
+          echo "testing secret ends"
+          echo "aws region"
+          echo "$AWS_DEFAULT_REGION"
+
+      - name: Add deploy label
+        uses: actions/github-script@v5
+        if: steps.command.outputs.command-name == 'deploy'
+        with:
+          script: |
+            github.rest.issues.addLabels({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: [':rocket: dev']
+            })
+
+      - name: Add comment
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GHA_TOKEN }}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: ${{ env.PR_ID }},
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `> 🚀 Dev Environment Ready (URL): https://${{ env.DEV_DOMAIN }}  @${{ github.event.sender.login }}`
+            })
