@@ -28,8 +28,8 @@
     "heroku:push": "git push heroku main"
   },
   "dependencies": {
-    "@nestjs/cli": "^9.1.4",
     "@nestjs/apollo": "^10.1.0",
+    "@nestjs/cli": "^9.1.4",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.0",
@@ -71,6 +71,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-simple-import-sort": "~7.0.0",
     "eslint-plugin-unicorn": "~35.0.0",
+    "husky": "^8.0.3",
     "jest": "28.1.2",
     "prettier": "^2.3.2",
     "source-map-support": "^0.5.20",
@@ -80,6 +81,18 @@
     "ts-node": "^10.0.0",
     "tsconfig-paths": "4.0.0",
     "typescript": "^4.3.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "./husky/pre-commit",
+      "pre-push": "./.husky/pre-push $HUSKY_GIT_STDIN"
+    }
+  },
+  "lint-staged": {
+    "*.(ts)": [
+      "yarn lint:fix",
+      "yarn format"
+    ]
   },
   "jest": {
     "moduleFileExtensions": [
@@ -95,6 +108,9 @@
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],
+    "moduleNameMapper": {
+      "@app/(.*)": "<rootDir>/src/$1"
+    },
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
   }
