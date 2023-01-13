@@ -1,8 +1,8 @@
 {
   "name": "void",
   "version": "0.0.1",
-  "description": "",
-  "author": "Abdulrahman Falyoun",
+  "description": "Void desc",
+  "author": "Abdulrahman Falyoun, Moutasem Habboub",
   "private": true,
   "license": "UNLICENSED",
   "engines": {
