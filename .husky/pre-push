@@ -1,0 +1,24 @@
+#!/bin/bash
+
+
+
+policy='[Policy] Never force push or delete the (main|master|dev) branch! (Prevented with pre-push hook.)'
+do_exit(){
+  echo "$policy"
+  exit 1
+}
+
+echo -e "===\n>> Pre-push Hook: Checking branch name..."
+
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+PROTECTED_BRANCHES="^(main|master|dev)"
+
+if [[ "$BRANCH" =~ $PROTECTED_BRANCHES ]]
+then
+  echo -e "\n🚫 Cannot push to remote $BRANCH branch, please create your own branch and use PR."
+  do_exit;
+fi
+
+echo -e ">> Finish checking branch name.\n==="
+
+exit 0
