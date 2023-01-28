@@ -8,8 +8,8 @@ export class LoginPayload {
   @IsNotEmpty({ message: 'Please enter email.' })
   email: string;
 
-  @Field()
-  @IsString()
-  @IsNotEmpty({ message: 'Please enter password.' })
-  password: string;
+  //@Field()
+  //@IsString()
+  //@IsNotEmpty({ message: 'Please enter password.' })
+  //password: string;
 }
