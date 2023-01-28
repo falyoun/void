@@ -31,6 +31,5 @@ import { LivePreviewModule } from '@app/modules/live-preview/live-preview.module
     GeofenceModule,
   ],
   controllers: [AppDefaultController],
-  
 })
 export class AppModule {}

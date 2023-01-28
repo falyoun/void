@@ -5,9 +5,9 @@ import { PrismaService } from '@app/app-prisma/prisma.service';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly prismaService:PrismaService) {}
+  constructor(private readonly prismaService: PrismaService) {}
   async createUser(data: CreateUserPayload) {
-    return this.prismaService.user.create({data});
+    return this.prismaService.user.create({ data });
   }
   async findAll(queryUsersArgsDto: QueryUsersArgsDto) {
     return this.prismaService.user.findMany();
