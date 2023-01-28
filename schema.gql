@@ -2,18 +2,15 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-directive @upper on FIELD_DEFINITION
-
 input CreateUserPayload {
   email: String!
   firstName: String!
   lastName: String!
-  password: String!
+  phoneNumber: String!
 }
 
 input LoginPayload {
   email: String!
-  password: String!
 }
 
 type Mutation {
@@ -22,13 +19,13 @@ type Mutation {
 }
 
 type Query {
-  users(skip: Int = 0, take: Int = 25): [User!]!
+  users(skip: Int! = 0, take: Int! = 25): [User!]!
 }
 
 """User"""
 type User {
-  _id: ID
   email: String!
   firstName: String!
   lastName: String!
+  phoneNumber: String!
 }
