@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-//import { RegistrationModule } from '@app/modules/registration/registration.module';
+import { RegistrationModule } from '@app/modules/registration/registration.module';
 
 @Module({
-  imports: [],
+  imports: [RegistrationModule],
 })
 export class SharedModule {}

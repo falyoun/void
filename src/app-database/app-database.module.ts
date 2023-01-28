@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigService } from '@nestjs/config';
-import { IAppConfig, IMongoDB } from '@app/app-config/app-config.interface';
+//import { IAppConfig, IMongoDB } from '@app/app-config/app-config.interface';
 import mongoose from 'mongoose';
 
 mongoose.set('debug', process.env.NODE_ENV !== 'production' && true);

@@ -1,21 +1,23 @@
 import { INestApplication, Injectable, OnModuleInit } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PrismaClient } from '@prisma/client';
+import { IAppConfig,IPrisma } from '@app/app-config/app-config.interface';
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit {
-  constructor(private configService: ConfigService) {
+  constructor(private configService: ConfigService<IAppConfig>) {
+    const userPrisma=configService.get<IPrisma>('usePrisma')
+    const url=userPrisma.connecter+'://'+
+              userPrisma.user+':'+
+              userPrisma.password+'@'+
+              userPrisma.host+':'+
+              userPrisma.port+'/'+
+              userPrisma.database+'?schema='+
+              userPrisma.schema;
     super({
       datasources: {
         db: {
-          url: `
-          ${configService.get<string>('DB_CONNECTOR')}://
-          ${configService.get<string>('DB_USER')}:
-          ${configService.get<string>('DB_PASSWORD')}@
-          ${configService.get<string>('DB_HOST')}:
-          ${configService.get<string>('DB_PORT')}/
-          ${configService.get<string>('DB_NAME')}?
-          schema=${configService.get<string>('public')}`,
+          url,
         },
       },
     });
