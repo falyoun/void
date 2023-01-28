@@ -6,9 +6,7 @@ import { User } from '@app/modules/users/models/user.model';
 import { AppPrismaModule } from '@app/app-prisma/app-prisma.module';
 
 @Module({
-  imports: [
-    AppPrismaModule
-  ],
+  imports: [AppPrismaModule],
   providers: [UsersResolver, UsersService],
   exports: [UsersService],
 })
