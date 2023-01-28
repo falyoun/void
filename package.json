@@ -26,7 +26,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "heroku:logs": "heroku logs --tail",
     "heroku:push": "git push heroku main",
-    "db:push": "prisma db push --schema src/app-prisma/prisma/schema.prisma",
+    "db:push": "prisma db push  --schema src/app-prisma/prisma/schema.prisma",
     "db:pull": "prisma db pull --schema src/app-prisma/prisma/schema.prisma",
     "db:generate": "prisma  generate --schema src/app-prisma/prisma/schema.prisma"
 

@@ -6,17 +6,17 @@ import mongoose from 'mongoose';
 
 mongoose.set('debug', process.env.NODE_ENV !== 'production' && true);
 @Module({
-  imports: [
-    MongooseModule.forRootAsync({
-      useFactory: async (configService: ConfigService<IAppConfig>) => {
-        const useMongoDB = configService.get<IMongoDB>('useMongoDB');
-        return {
-          uri: process.env.MONGODB_DATABASE_URI || useMongoDB.uri,
-          // replicaSet: dbConfig.replicaSet,
-        };
-      },
-      inject: [ConfigService],
-    }),
-  ],
+  //imports: [
+  //  MongooseModule.forRootAsync({
+  //    useFactory: async (configService: ConfigService<IAppConfig>) => {
+  //      const useMongoDB = configService.get<IMongoDB>('useMongoDB');
+  //      return {
+  //        uri: process.env.MONGODB_DATABASE_URI || useMongoDB.uri,
+  //        // replicaSet: dbConfig.replicaSet,
+  //      };
+  //    },
+  //    inject: [ConfigService],
+  //  }),
+  //],
 })
 export class AppDatabaseModule {}

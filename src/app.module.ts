@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
 import { AppGraphqlModule } from '@app/app-grpahql/app-graphql.module';
-import { AppDatabaseModule } from '@app/app-database/app-database.module';
 import { AppConfigModule } from '@app/app-config/app-config.module';
 import { SharedModule } from '@app/modules/shared.module';
 import { AppDefaultController } from '@app/app-controllers/app-default.controller';
-import { AppPrismaModule } from './app-prisma/app-prisma.module';
+import { AppPrismaModule } from '@app/app-prisma/app-prisma.module';
 import { SocketServerModule } from '@app/sockets/socket.module';
 import { DevicesModule } from '@app/modules/devices/devices.module';
 import { VehiclesModule } from '@app/modules/vehicles/vehicles.module';
@@ -20,7 +19,7 @@ import { LivePreviewModule } from '@app/modules/live-preview/live-preview.module
     AppConfigModule,
     SharedModule,
     AppGraphqlModule,
-    AppDatabaseModule, AppPrismaModule,
+    AppPrismaModule,
     TripsModule,
     UsersModule,
     DevicesModule,
@@ -32,5 +31,6 @@ import { LivePreviewModule } from '@app/modules/live-preview/live-preview.module
     GeofenceModule,
   ],
   controllers: [AppDefaultController],
+  
 })
 export class AppModule {}
