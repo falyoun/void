@@ -6,7 +6,9 @@ import { ConsolidatedQueryDto } from '@app/modules/avl-packets/dtos/consolidated
 
 @Injectable()
 export class AvlPacketsService {
-  constructor(private readonly avlPacket: AvlPacket) {}
+  constructor(
+    // private readonly avlPacket: AvlPacket
+  ) {}
 
   findOne(filterQuery: FilterQuery<AvlPacket>) {}
   async findAll(collectionDto: any) {}

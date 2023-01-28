@@ -1,18 +1,9 @@
-import { Document, Schema as MongooseSchema, Types } from 'mongoose';
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Car } from '@app/modules/cars/models';
+import { Vehicle } from '@app/modules/vehicles/models/vehicles.model';
 
-@Schema({ timestamps: true })
 export class Driver {
-  _id: Types.ObjectId;
+  _id: string;
   name: string;
   emirateId: string;
-  car?: Car | Types.ObjectId;
-
-  @Prop({
-    type: [MongooseSchema.Types.Mixed],
-    required: false,
-    default: [],
-  })
-  cars: Car[] | Types.ObjectId[];
+  vehicle?: Vehicle;
+  vehicles: Vehicle[];
 }

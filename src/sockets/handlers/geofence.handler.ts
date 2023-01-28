@@ -35,14 +35,14 @@ export class GeofenceHandler {
       slots.add(+geoIo.dimension);
       this.deviceConnection.getLogger().log(geoIo);
     });
-    const geofences = await this.deviceConnection
+    const geofence = await this.deviceConnection
       .getServices()
       .device.findGeofences({
         deviceId: device._id,
         slots: Array.from(slots.values()),
       });
     const geofenceSlotMap = new Map<number, any>();
-    geofences.forEach((geofence) =>
+    geofence.forEach((geofence) =>
       geofenceSlotMap.set(geofence.slot, geofence),
     );
 

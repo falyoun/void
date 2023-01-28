@@ -8,7 +8,7 @@ import {
 } from 'class-validator';
 import { Types } from 'mongoose';
 
-export class CreateCarDto {
+export class CreateVehicleDto {
   @Expose()
   @IsNotEmpty()
   @IsMongoId()

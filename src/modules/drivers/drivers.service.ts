@@ -3,14 +3,13 @@ import { FilterQuery } from 'mongoose';
 import { Driver } from '@app/modules/drivers/models/driver.model';
 import { UpdateDriverDto } from '@app/modules/drivers/dtos/update-driver.dto';
 import { CreateDriverDto } from '@app/modules/drivers/dtos/create-driver.dto';
-import { CarsService } from '@app/modules/cars/cars.service';
+import { VehiclesService } from '@app/modules/vehicles/vehicles.service';
 
 @Injectable()
 export class DriversService {
   constructor(
-    private readonly driversModel: Driver,
-    @Inject(forwardRef(() => CarsService))
-    private readonly carsService: CarsService,
+    @Inject(forwardRef(() => VehiclesService))
+    private readonly carsService: VehiclesService,
   ) {}
 
   findOne(filter: FilterQuery<Driver>) {}

@@ -6,7 +6,6 @@ import { SocketServerModule } from '@app/sockets/socket.module';
 
 @Module({
   providers: [GeofenceService, GeofenceEventService],
-  controllers: [],
   imports: [
     forwardRef(() => SocketServerModule),
     forwardRef(() => DevicesModule),

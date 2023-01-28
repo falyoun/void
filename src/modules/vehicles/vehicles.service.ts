@@ -1,31 +1,30 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { FilterQuery } from 'mongoose';
-import { Car } from './models';
+import { Vehicle } from './models/vehicles.model';
 import { TripsService } from '@app/modules/trips/trips.service';
 import { DriversService } from '@app/modules/drivers/drivers.service';
 import { DevicesService } from '@app/modules/devices/devices.service';
-import { UpdateCarDto } from '@app/modules/cars/dtos/update-car.dto';
-import { CreateCarDto } from '@app/modules/cars/dtos/create-car.dto';
+import { UpdateVehicleDto } from '@app/modules/vehicles/dtos/update-vehicle.dto';
+import { CreateVehicleDto } from '@app/modules/vehicles/dtos/create-vehicle.dto';
 
 @Injectable()
-export class CarsService {
+export class VehiclesService {
   constructor(
-    private readonly carsModel: Car,
     private readonly tripsService: TripsService,
     private readonly driversService: DriversService,
     @Inject(forwardRef(() => DevicesService))
     private readonly devicesService: DevicesService,
   ) {}
 
-  findOne(filterQuery: FilterQuery<Car>) {}
+  findOne(filterQuery: FilterQuery<Vehicle>) {}
 
   async findAllWithTrips(collectionDto: any) {}
 
   findAll(collectionDto: any) {}
 
-  createOne(dto: CreateCarDto) {}
+  createOne(dto: CreateVehicleDto) {}
 
-  updateOne(filter: FilterQuery<Car>, dto: UpdateCarDto) {}
+  updateOne(filter: FilterQuery<Vehicle>, dto: UpdateVehicleDto) {}
 
-  removeOne(filter: FilterQuery<Car>) {}
+  removeOne(filter: FilterQuery<Vehicle>) {}
 }

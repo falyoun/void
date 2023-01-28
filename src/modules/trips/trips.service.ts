@@ -14,7 +14,7 @@ import { Trip } from '@app/modules/trips/models/trip.model';
 import { CreateTripDto } from '@app/modules/trips/dtos/create-trip.dto';
 import { AvlPacketsService } from '@app/modules/avl-packets/avl-packets.service';
 import { metersToDistance } from '@app/shared/utils/meters-to-distance';
-import { CarsService } from '@app/modules/cars/cars.service';
+import { VehiclesService } from '@app/modules/vehicles/vehicles.service';
 import { secondsToDuration } from '@app/shared/utils/seconds-to-time';
 
 export type AggregationResult = {
@@ -26,17 +26,17 @@ export type AggregationResult = {
   totalDistance: number;
 };
 
-const ReportsTemplates = {
-  consolidated: readFileSync(
-    join(process.cwd(), 'public/reports', 'daily.html'),
-  ).toString(),
-  detailedTrip: readFileSync(
-    join(process.cwd(), 'public/reports', 'detailed-trip.html'),
-  ).toString(),
-  location: readFileSync(
-    join(process.cwd(), 'public/reports', 'location.html'),
-  ).toString(),
-};
+// const ReportsTemplates = {
+//   consolidated: readFileSync(
+//     join(process.cwd(), 'public/reports', 'daily.html'),
+//   ).toString(),
+//   detailedTrip: readFileSync(
+//     join(process.cwd(), 'public/reports', 'detailed-trip.html'),
+//   ).toString(),
+//   location: readFileSync(
+//     join(process.cwd(), 'public/reports', 'location.html'),
+//   ).toString(),
+// };
 
 HandleBars.registerHelper('to-time', secondsToDuration);
 HandleBars.registerHelper('to-distance', metersToDistance);
@@ -53,10 +53,8 @@ HandleBars.registerHelper('round', (num: number | string, points: number) =>
 @Injectable()
 export class TripsService {
   constructor(
-    private readonly tripDocument: Trip,
+    // private readonly tripDocument: Trip,
     private readonly avlPacketsServices: AvlPacketsService,
-    @Inject(forwardRef(() => CarsService))
-    private readonly carsService: CarsService,
   ) {}
 
   createTrip(createTripDto: CreateTripDto) {

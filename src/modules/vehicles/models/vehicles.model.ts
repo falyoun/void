@@ -1,9 +1,7 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Driver } from '@app/modules/drivers/models/driver.model';
 import { Device } from '@app/modules/devices/models/device.model';
 
-@Schema({ timestamps: true })
-export class Car {
+export class Vehicle {
   _id: string;
   carModel: string;
   manufacturingYear: Date;
