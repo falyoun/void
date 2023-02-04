@@ -1,5 +1,12 @@
-export interface IMongoDB {
+export interface IPrisma{
   uri: string;
+  connecter: string;
+  host: string;
+  port: number;
+  database: string;
+  user: string;
+  password: string;
+  schema: string;
 }
 export interface ISwagger {
   title: string;
@@ -115,7 +122,7 @@ export interface IFastForexConfig {
 }
 
 export interface IAppConfig {
-  useMongoDB: IMongoDB;
+  usePrisma: IPrisma;
   dapi: IDapi;
   server: IServer;
   useAuth: IAuth;
