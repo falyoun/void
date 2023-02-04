@@ -29,8 +29,6 @@
     "db:push": "prisma db push  --schema src/app-prisma/prisma/schema.prisma",
     "db:pull": "prisma db pull --schema src/app-prisma/prisma/schema.prisma",
     "db:generate": "prisma  generate --schema src/app-prisma/prisma/schema.prisma"
-
-
   },
   "dependencies": {
     "@nestjs/apollo": "^10.1.0",
@@ -41,23 +39,30 @@
     "@nestjs/graphql": "^10.1.2",
     "@nestjs/mongoose": "^9.2.0",
     "@nestjs/platform-express": "^9.0.0",
+    "@nestjs/platform-socket.io": "^9.2.1",
     "@nestjs/swagger": "^6.1.2",
     "@prisma/client": "^4.9.0",
+    "@nestjs/websockets": "^9.2.1",
     "@sentry/node": "^7.13.0",
     "apollo-server-express": "^3.10.2",
     "bcrypt": "^5.0.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
     "cls-hooked": "^4.2.2",
+    "codecs-sdk": "^0.2.2",
     "cookie-parser": "^1.4.6",
     "graphql": "^16.6.0",
+    "handlebars": "^4.7.7",
+    "html-pdf": "^3.0.1",
     "joi": "^17.6.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.1",
+    "nest-cli": "^0.0.5",
     "reflect-metadata": "^0.1.13",
     "request-context": "^2.0.0",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.2.0"
+    "rxjs": "^7.2.0",
+    "socket.io": "^4.5.4"
   },
   "devDependencies": {
     "@nestjs/schematics": "^9.0.0",
