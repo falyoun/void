@@ -5,8 +5,11 @@ export class CreateUserPayload {
   @Field()
   email: string;
 
+  //@Field()
+  //password: string;
+
   @Field()
-  password: string;
+  phoneNumber: string;
 
   @Field()
   firstName: string;

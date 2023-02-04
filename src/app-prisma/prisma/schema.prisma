@@ -1,0 +1,255 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [citext, pgcrypto]
+}
+
+enum Availability {
+  AVAILABLE
+  OWNED
+  RENTED
+  UNAVAILABLE
+}
+
+enum Role {
+  ADMIN
+  SUPER_ADMIN
+  MANAGER
+  OWNER
+  DRIVER
+}
+
+enum PacketTypesEnum {
+  PERMANENT_IO_ELEMENTS
+  EVENTUAL_IO_ELEMENTS
+  E_SCOOTER_ELEMENTS
+  CAN_BOSCH_IO_ELEMENTS
+  CAN_ASKOLL_IO_ELEMENTS
+  MANUAL_CAN_IO_ELEMENTS
+  DEFAULT_J1939_IO_ELEMENTS
+  SUPER_SOCO_IO_ELEMENTS
+  BLE_SENSOR_IO_ELEMENTS
+  OBD_ELEMENTS
+  OBD_OEM_ELEMENTS
+  CAN_ADAPTER_ELEMENTS
+}
+
+model User {
+  id                String    @id @default(uuid())
+  email             String    @unique @db.Citext
+  phoneNumber       String    @unique @map("phone_number")
+  firstName         String    @map("first_name")
+  lastName          String    @map("last_ame")
+  password          String
+  passwordChangedAt DateTime  @default(now()) @map("password_changed_at")
+  isAivated         Boolean   @default(false) @map("is_activated")
+  createdAt         DateTime  @default(now()) @map("created_at")
+  updatedAt         DateTime  @updatedAt @map("updated_at")
+  deletedAt         DateTime? @map("deleted_at")
+
+  driver  Driver?
+  owner   Owner?
+  profile UserProfile?
+  role    UserRole?
+}
+
+model UserProfile {
+  id        String    @id @default(uuid())
+  userId    String    @unique @map("user_id")
+  deletedAt DateTime? @map("deleted_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], map: "profile_user_id_fkey")
+}
+
+model UserRole {
+  id        String    @id @default(uuid())
+  userId    String    @unique @map("user_id")
+  name      Role      @default(DRIVER)
+  deletedAt DateTime? @map("deleted_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], map: "user_role_user_id_fkey")
+}
+
+model Owner {
+  id        String    @id @default(uuid())
+  userId    String    @unique @map("user_id")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  user User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  own  Own[]
+
+  @@index([userId], map: "owner_user_id_fkey")
+}
+
+model Driver {
+  id        String    @id @default(uuid())
+  userId    String    @unique @map("user_id")
+  isRenting Boolean   @default(false) @map("is_renting")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  user User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  rent Rent[]
+
+  @@index([userId], map: "driver_user_id_fkey")
+}
+
+model Vehicle {
+  id            String       @id @default(uuid())
+  vehicleNumber String       @unique @map("vehicle_number")
+  vehicleStatus Availability @default(OWNED) @map("vehicle_status")
+  createdAt     DateTime     @default(now()) @map("created_at")
+  updatedAt     DateTime     @updatedAt @map("updated_at")
+  deletedAt     DateTime?    @map("deleted_at")
+
+  profile VehicleProfile?
+  rent    Rent[]
+  own     Own?
+  divice  Divice?
+}
+
+model VehicleProfile {
+  id              String    @id @default(uuid())
+  vehicle_id      String    @unique @map("user_id")
+  vehicleTake     String?   @map("vehicle_make")
+  vehicleModel    String?   @map("vehicle_model")
+  vehicleYear     String?   @map("vehicle_year")
+  vehicleColor    String?   @map("vehicle_color")
+  vehiclePlate    String?   @map("vehicle_plate")
+  vehicleCapacity Int?      @map("vehicle_capacity")
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+  deletedAt       DateTime? @map("deleted_at")
+
+  vehicle Vehicle @relation(fields: [vehicle_id], references: [id], onDelete: Cascade)
+
+  @@index([vehicle_id], map: "vehicle_profile_vehicle_id_fkey")
+}
+
+model Rent {
+  id        String    @id @default(uuid())
+  vehicleId String    @map("vehicle_id")
+  driverId  String    @map("driver_id")
+  rentStart DateTime  @map("rent_start")
+  rentEnd   DateTime  @map("rent_end")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  vehicle Vehicle @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  driver  Driver  @relation(fields: [driverId], references: [id], onDelete: Cascade)
+
+  @@index([vehicleId], map: "rent_vehicle_id_fkey")
+  @@index([driverId], map: "rent_driver_id_fkey")
+}
+
+model Own {
+  id        String    @id @default(uuid())
+  vehicleId String    @unique @map("vehicle_id")
+  ownerId   String    @map("owner_id")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  vehicle Vehicle @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  owner   Owner   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+  @@unique([vehicleId, ownerId])
+  @@index([vehicleId], map: "own_vehicle_id_fkey")
+  @@index([ownerId], map: "own_owner_id_fkey")
+}
+
+model Divice {
+  id        String    @id @default(uuid())
+  IMEI      String    @unique
+  vehicleId String    @unique @map("vehicle_id")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  vehicle   Vehicle     @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  avlPacket AVLPacket[]
+
+  @@index([vehicleId], map: "divice_vehicle_id_fkey")
+}
+
+model AVLPacket {
+  id        String    @id @default(uuid())
+  rowPacket Json      @map("row_packet") @db.Json
+  deviceId  String    @map("device_id")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+  device    Divice    @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+  avlData   AVLData[]
+}
+
+model AVLData {
+  id          String    @id @default(uuid())
+  avlPacketId String    @map("avl_packet_id")
+  priority    Int
+  dateTime    DateTime  @map("date_time")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  deletedAt   DateTime? @map("deleted_at")
+
+  avlPacket  AVLPacket    @relation(fields: [avlPacketId], references: [id], onDelete: Cascade)
+  GPSElement GPSElement[]
+  IOElement  IOElement[]
+}
+
+model GPSElement {
+  id        String    @id @default(uuid())
+  avlDataId String    @map("avl_data_id")
+  latitude  Float
+  longitude Float
+  altitude Float
+  angle Float
+  satellites Float
+  speed Float
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  avlData AVLData @relation(fields: [avlDataId], references: [id], onDelete: Cascade)
+}
+
+model IOElement {
+  id        String    @id @default(uuid())
+  avlDataId String    @map("avl_data_id")
+  ioType    String    @map("io_type")
+  ioValue   Float    @map("io_value")
+  lable     String
+  dimension String
+  valueHuman String @map("value_human")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+  avlData AVLData @relation(fields: [avlDataId], references: [id], onDelete: Cascade)
+
+}
+// otp table
+model OTP {
+  id        String    @id @default(uuid())
+  otp       String
+  phone     String
+  expiredAt DateTime  @map("expired_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+}
