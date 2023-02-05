@@ -29,8 +29,6 @@
     "db:push": "prisma db push  --schema src/app-prisma/prisma/schema.prisma",
     "db:pull": "prisma db pull --schema src/app-prisma/prisma/schema.prisma",
     "db:generate": "prisma  generate --schema src/app-prisma/prisma/schema.prisma"
-
-
   },
   "dependencies": {
     "@nestjs/apollo": "^10.1.0",
@@ -59,6 +57,7 @@
     "joi": "^17.6.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.1",
+    "nest-cli": "^0.0.5",
     "reflect-metadata": "^0.1.13",
     "request-context": "^2.0.0",
     "rimraf": "^3.0.2",

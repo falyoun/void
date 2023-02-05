@@ -8,11 +8,13 @@ input CreateUserPayload {
   email: String!
   firstName: String!
   lastName: String!
+  password: String!
   phoneNumber: String!
 }
 
 input LoginPayload {
   email: String!
+  password: String!
 }
 
 type Mutation {
