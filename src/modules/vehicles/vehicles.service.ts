@@ -2,7 +2,7 @@ import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { Vehicle } from './models/vehicles.model';
 import { TripsService } from '@app/modules/trips/trips.service';
 import { DriversService } from '@app/modules/drivers/drivers.service';
-import { DevicesService } from '@app/modules/devices/devices.service';
+import { DevicesService } from '@app/modules/devices/services/devices.service';
 import { UpdateVehicleDto } from '@app/modules/vehicles/dtos/update-vehicle.dto';
 import { CreateVehicleDto } from '@app/modules/vehicles/dtos/create-vehicle.dto';
 

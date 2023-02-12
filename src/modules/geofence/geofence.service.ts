@@ -5,7 +5,7 @@ import { GetEventsDto } from './dto/get-events.dto';
 import { UpdateGeofenceDto } from './dto/update-geofence.dto';
 import { ConnectionPool } from '@app/sockets/connection-pool';
 import { DeviceConnection } from '@app/sockets/connection';
-import { DevicesService } from '@app/modules/devices/devices.service';
+import { DevicesService } from '@app/modules/devices/services/devices.service';
 
 @Injectable()
 export class GeofenceService {

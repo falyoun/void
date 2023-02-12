@@ -1,15 +1,21 @@
 import { CarStatus } from '@app/sockets/packet-utils';
 import { GpsElement } from 'codecs-sdk';
+import { Field, ObjectType } from '@nestjs/graphql';
 
+@ObjectType()
 export class Device {
-  _id: string;
+  @Field()
+  id: string;
 
+  @Field()
   name: string;
 
+  @Field()
   IMEI: string;
 
-  cars: any[]
-  car?: any;
+  vehicles: any[];
+  vehicle?: any;
+
   lastLocation?: GpsElement;
   lastCarStatus?: CarStatus;
 }

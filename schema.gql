@@ -4,31 +4,19 @@
 
 directive @upper on FIELD_DEFINITION
 
-input CreateUserPayload {
-  email: String!
-  firstName: String!
-  lastName: String!
-  password: String!
-}
-
-input LoginPayload {
-  email: String!
-  password: String!
+type Device {
+  IMEI: String!
+  id: String!
+  name: String!
 }
 
 type Mutation {
-  login(payload: LoginPayload!): User!
-  user(payload: CreateUserPayload!): User!
+  deleteDevice: Boolean!
+  device: Device!
+  updateDevice: Device!
 }
 
 type Query {
-  users(skip: Int = 0, take: Int = 25): [User!]!
-}
-
-"""User"""
-type User {
-  _id: ID
-  email: String!
-  firstName: String!
-  lastName: String!
+  deviceById: Device!
+  devices: [Device!]!
 }

@@ -1,7 +1,7 @@
 import { LivePreviewWsg } from '@app/web-socket-gateways/live-preview-wsg';
 import { TripsService } from '@app/modules/trips/trips.service';
 import { GeofenceEventService } from '@app/modules/geofence/geofence-event.service';
-import { DevicesService } from '@app/modules/devices/devices.service';
+import { DevicesService } from '@app/modules/devices/services/devices.service';
 import { AvlPacketsService } from '@app/modules/avl-packets/avl-packets.service';
 
 export type ReconnectionConfig = {
