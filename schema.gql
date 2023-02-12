@@ -34,6 +34,8 @@ type Query {
 }
 
 type Vehicle {
+  createdAt: DateTime!
+  deletedAt: DateTime!
   device: Device!
   devices: [Device!]!
   driver: [Driver!]!
@@ -42,4 +44,23 @@ type Vehicle {
   manufacturingYear: DateTime!
   model: String!
   plateNumber: String!
+  profile: VehicleProfile!
+  updatedAt: DateTime!
+  vehicleNumber: String!
+  vehicleStatus: String!
+}
+
+type VehicleProfile {
+  createdAt: DateTime!
+  deletedAt: DateTime!
+  id: String!
+  updatedAt: DateTime!
+  vehicle: Vehicle!
+  vehicleCapacity: Float!
+  vehicleColor: String!
+  vehicleModel: String!
+  vehiclePlate: String!
+  vehicleTake: String!
+  vehicleYear: String!
+  vehicle_id: String!
 }
