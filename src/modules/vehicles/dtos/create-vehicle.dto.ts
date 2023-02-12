@@ -1,18 +1,15 @@
 import { Expose } from 'class-transformer';
 import {
   IsDateString,
-  IsMongoId,
   IsNotEmpty,
   IsOptional,
   IsString,
 } from 'class-validator';
-import { Types } from 'mongoose';
 
 export class CreateVehicleDto {
   @Expose()
   @IsNotEmpty()
-  @IsMongoId()
-  company: Types.ObjectId;
+  company: string;
 
   @Expose()
   @IsString()
@@ -26,13 +23,11 @@ export class CreateVehicleDto {
 
   @Expose()
   @IsOptional()
-  @IsMongoId()
-  device?: Types.ObjectId;
+  device?: string;
 
   @Expose()
   @IsOptional()
-  @IsMongoId()
-  driver?: Types.ObjectId;
+  driver?: string;
 
   @Expose()
   @IsNotEmpty()

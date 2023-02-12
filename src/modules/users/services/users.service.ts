@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { QueryUsersArgsDto } from '@app/modules/users/queries-types/query-users-args.dto';
 import { CreateUserPayload } from '@app/modules/users/payloads/create-user.payload';
 import { PrismaService } from '@app/app-prisma/prisma.service';
 
@@ -9,7 +8,7 @@ export class UsersService {
   async createUser(data: CreateUserPayload) {
     return this.prismaService.user.create({ data });
   }
-  async findAll(queryUsersArgsDto: QueryUsersArgsDto) {
+  async findAll(queryUsersArgsDto: any) {
     return this.prismaService.user.findMany();
   }
 }

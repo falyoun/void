@@ -1,18 +1,21 @@
-import { Types } from 'mongoose';
-import { Schema } from '@nestjs/mongoose';
 import { CarStatus } from '@app/sockets/packet-utils';
 import { GpsElement } from 'codecs-sdk';
+import { Field, ObjectType } from '@nestjs/graphql';
 
-@Schema({ timestamps: true })
+@ObjectType()
 export class Device {
-  _id: Types.ObjectId;
+  @Field()
+  id: string;
 
+  @Field()
   name: string;
 
+  @Field()
   IMEI: string;
 
-  cars: Types.ObjectId[];
-  car?: Types.ObjectId;
+  vehicles: any[];
+  vehicle?: any;
+
   lastLocation?: GpsElement;
   lastCarStatus?: CarStatus;
 }

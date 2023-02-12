@@ -6,7 +6,7 @@ import { ConnectionPool } from '../connection-pool';
 import { ConfigService } from '@nestjs/config';
 import { TripsService } from '@app/modules/trips/trips.service';
 import { LivePreviewWsg } from '@app/web-socket-gateways/live-preview-wsg';
-import { DevicesService } from '@app/modules/devices/devices.service';
+import { DevicesService } from '@app/modules/devices/services/devices.service';
 import { GeofenceEventService } from '@app/modules/geofence/geofence-event.service';
 import { AvlPacketsService } from '@app/modules/avl-packets/avl-packets.service';
 

@@ -6,7 +6,6 @@ import {
   ValidateIf,
 } from 'class-validator';
 import { Expose, Type } from 'class-transformer';
-import { Types } from 'mongoose';
 
 export type ReportsType = 'consolidated' | 'detailedTrip' | 'location';
 export class GenerateReportDto {
@@ -18,7 +17,7 @@ export class GenerateReportDto {
   @Expose()
   @IsNotEmpty()
   @IsMongoId()
-  deviceId: Types.ObjectId;
+  deviceId: string;
 
   @Expose()
   @IsNotEmpty()
