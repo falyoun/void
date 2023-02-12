@@ -4,7 +4,6 @@ import {
   Inject,
   Injectable,
 } from '@nestjs/common';
-import { Types } from 'mongoose';
 import { GenerateReportDto } from './dtos/generate-report.dto';
 import { readFileSync } from 'fs';
 import HandleBars from 'handlebars';
@@ -61,7 +60,7 @@ export class TripsService {
     // return this.tripDocument.create(createTripDto);
   }
 
-  async getLatestTrip(deviceId: Types.ObjectId | string) {}
+  async getLatestTrip(deviceId: string) {}
 
   async generateReport({
     deviceId,

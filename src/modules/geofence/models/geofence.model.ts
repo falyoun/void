@@ -1,8 +1,7 @@
-import { Types } from 'mongoose';
 import { GeofenceTypeEnum } from '@app/modules/geofence/dto/create-geofence.dto';
 
 export class Geofence {
-  _id: Types.ObjectId;
+  _id: string;
   name: string;
   shapeType: GeofenceTypeEnum;
   radius?: number;
@@ -12,8 +11,8 @@ export class Geofence {
   y2?: number;
   slot: number;
   enable: boolean;
-  device: Types.ObjectId | any;
-  company: Types.ObjectId | any;
+  device: any;
+  company: any;
 }
 
 // GeofenceSchema.index({ slot: 1, device: 1 }, { unique: true });

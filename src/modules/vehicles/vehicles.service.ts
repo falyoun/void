@@ -1,5 +1,4 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
-import { FilterQuery } from 'mongoose';
 import { Vehicle } from './models/vehicles.model';
 import { TripsService } from '@app/modules/trips/trips.service';
 import { DriversService } from '@app/modules/drivers/drivers.service';
@@ -16,7 +15,7 @@ export class VehiclesService {
     private readonly devicesService: DevicesService,
   ) {}
 
-  findOne(filterQuery: FilterQuery<Vehicle>) {}
+  findOne() {}
 
   async findAllWithTrips(collectionDto: any) {}
 
@@ -24,7 +23,7 @@ export class VehiclesService {
 
   createOne(dto: CreateVehicleDto) {}
 
-  updateOne(filter: FilterQuery<Vehicle>, dto: UpdateVehicleDto) {}
+  updateOne(dto: UpdateVehicleDto) {}
 
-  removeOne(filter: FilterQuery<Vehicle>) {}
+  removeOne() {}
 }

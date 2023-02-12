@@ -1,6 +1,5 @@
 import { Expose } from 'class-transformer';
 import { IsMongoId, IsNotEmpty, IsOptional, IsString } from 'class-validator';
-import { Types } from 'mongoose';
 
 export class CreateDeviceDto {
   @Expose()
@@ -15,11 +14,6 @@ export class CreateDeviceDto {
 
   @Expose()
   @IsMongoId()
-  @IsNotEmpty()
-  company: Types.ObjectId;
-
-  @Expose()
-  @IsMongoId()
   @IsOptional()
-  car?: Types.ObjectId;
+  car?: any;
 }

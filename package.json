@@ -23,9 +23,7 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
-    "heroku:logs": "heroku logs --tail",
-    "heroku:push": "git push heroku main"
+    "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
     "@nestjs/apollo": "^10.1.0",
@@ -52,7 +50,6 @@
     "html-pdf": "^3.0.1",
     "joi": "^17.6.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.6.1",
     "reflect-metadata": "^0.1.13",
     "request-context": "^2.0.0",
     "rimraf": "^3.0.2",
