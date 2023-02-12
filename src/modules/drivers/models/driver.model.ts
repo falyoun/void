@@ -1,9 +1,14 @@
 import { Vehicle } from '@app/modules/vehicles/models/vehicles.model';
+import { Field, ObjectType } from '@nestjs/graphql';
 
+@ObjectType()
 export class Driver {
-  _id: string;
+  @Field()
+  id: string;
+  @Field()
   name: string;
-  emirateId: string;
+  @Field(() => Vehicle)
   vehicle?: Vehicle;
+  @Field(() => [Vehicle])
   vehicles: Vehicle[];
 }

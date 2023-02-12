@@ -13,7 +13,7 @@ import { Trip } from '@app/modules/trips/models/trip.model';
 import { CreateTripDto } from '@app/modules/trips/dtos/create-trip.dto';
 import { AvlPacketsService } from '@app/modules/avl-packets/avl-packets.service';
 import { metersToDistance } from '@app/shared/utils/meters-to-distance';
-import { VehiclesService } from '@app/modules/vehicles/vehicles.service';
+import { VehiclesService } from '@app/modules/vehicles/services/vehicles.service';
 import { secondsToDuration } from '@app/shared/utils/seconds-to-time';
 
 export type AggregationResult = {
