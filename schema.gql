@@ -4,19 +4,42 @@
 
 directive @upper on FIELD_DEFINITION
 
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Device {
   IMEI: String!
   id: String!
   name: String!
 }
 
+type Driver {
+  id: String!
+  name: String!
+  vehicle: Vehicle!
+  vehicles: [Vehicle!]!
+}
+
 type Mutation {
   deleteDevice: Boolean!
-  device: Device!
-  updateDevice: Device!
+  device: Vehicle!
+  updateDevice: Vehicle!
 }
 
 type Query {
-  deviceById: Device!
+  deviceById: Vehicle!
+  devices: [Vehicle!]!
+}
+
+type Vehicle {
+  device: Device!
   devices: [Device!]!
+  driver: [Driver!]!
+  drivers: [Driver!]!
+  id: String!
+  manufacturingYear: DateTime!
+  model: String!
+  plateNumber: String!
 }
