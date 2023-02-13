@@ -1,4 +1,4 @@
-export interface IPrisma{
+export interface IPrisma {
   uri: string;
   connecter: string;
   host: string;
@@ -8,6 +8,26 @@ export interface IPrisma{
   password: string;
   schema: string;
 }
+
+export interface ITwilio {
+  accountSid: string;
+  authToken: string;
+  verificationServiceSid: string;
+  phoneNumber: string;
+}
+
+export interface IAuthentication {
+  issuer: string;
+  privateKey: string;
+  publicKey: string;
+  useAccessToken: {
+    expiration: string;
+  };
+  useRefreshToken: {
+    expiration: string;
+  };
+}
+
 export interface ISwagger {
   title: string;
   version: string;
@@ -123,6 +143,8 @@ export interface IFastForexConfig {
 
 export interface IAppConfig {
   usePrisma: IPrisma;
+  useTwilio: ITwilio;
+  authentication: IAuthentication;
   dapi: IDapi;
   server: IServer;
   useAuth: IAuth;

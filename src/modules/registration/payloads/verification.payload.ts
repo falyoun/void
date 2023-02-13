@@ -2,7 +2,7 @@ import { Field, InputType } from '@nestjs/graphql';
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
 @InputType()
-export class LoginPayload {
+export class VerificationPayload {
   @Field()
   @IsString()
   @IsNotEmpty({ message: 'Please enter phoneNumber.' })
@@ -10,6 +10,6 @@ export class LoginPayload {
 
   @Field()
   @IsString()
-  @IsNotEmpty({ message: 'Please enter password.' })
-  password: string;
+  @IsNotEmpty({ message: 'Please enter otp.' })
+  otp: string;
 }

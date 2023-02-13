@@ -13,8 +13,8 @@ export class UsersResolver {
     return this.usersService.createUser(payload);
   }
 
-  @Query(() => [User])
-  users(@Args() queryUsersArgsDto: QueryUsersArgsDto): Promise<User[]> {
-    return this.usersService.findAll(queryUsersArgsDto);
-  }
+  //@Query(() => [User])
+  //users(@Args() queryUsersArgsDto: QueryUsersArgsDto): Promise<User[]> {
+  //  return this.usersService.findAll(queryUsersArgsDto);
+  //}
 }

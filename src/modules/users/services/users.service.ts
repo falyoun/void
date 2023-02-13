@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { QueryUsersArgsDto } from '@app/modules/users/queries-types/query-users-args.dto';
 import { CreateUserPayload } from '@app/modules/users/payloads/create-user.payload';
 import { PrismaService } from '@app/app-prisma/prisma.service';
+import { ResourceNotFoundException } from '@app/shared/exceptions/coded-exception';
 
 @Injectable()
 export class UsersService {
@@ -11,5 +12,28 @@ export class UsersService {
   }
   async findAll(queryUsersArgsDto: QueryUsersArgsDto) {
     return this.prismaService.user.findMany();
+  }
+
+  // find user by phoneNumber and validate password
+  async findOneByPhoneNumber(phoneNumber: string) {
+    const user = await this.prismaService.user.findUnique({
+      where: { phoneNumber },
+      include: { role: true },
+    });
+    if (!user || user.deletedAt) {
+      throw new ResourceNotFoundException('User not found');
+    }
+    return user;
+  }
+  // find user by id
+  async findOneById(id: string) {
+    const user = await this.prismaService.user.findUnique({
+      where: { id },
+      include: { role: true },
+    });
+    if (!user || user.deletedAt) {
+      throw new ResourceNotFoundException('User not found');
+    }
+    return user;
   }
 }

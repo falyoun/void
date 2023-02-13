@@ -13,17 +13,32 @@ input CreateUserPayload {
 }
 
 input LoginPayload {
-  email: String!
   password: String!
+  phoneNumber: String!
 }
 
 type Mutation {
+  getNewTokens: SignResponse!
   login(payload: LoginPayload!): User!
   user(payload: CreateUserPayload!): User!
+  verifyOTP(payload: VerificationPayload!): SignResponse!
 }
 
 type Query {
-  users(skip: Int! = 0, take: Int! = 25): [User!]!
+  hello: String!
+  hello2: String!
+}
+
+"""Role"""
+type Role {
+  id: ID!
+  name: String!
+}
+
+type SignResponse {
+  accessToken: String!
+  refreshToken: String!
+  user: User!
 }
 
 """User"""
@@ -31,5 +46,11 @@ type User {
   email: String!
   firstName: String!
   lastName: String!
+  phoneNumber: String!
+  roles: [Role!]!
+}
+
+input VerificationPayload {
+  otp: String!
   phoneNumber: String!
 }
