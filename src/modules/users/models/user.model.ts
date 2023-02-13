@@ -23,6 +23,5 @@ export class User {
   // @Field()
   // creationDate: Date;
   //
-  @Field((type) => Role)
-  roles: Role;
+
 }

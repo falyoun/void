@@ -18,7 +18,6 @@ export class LoginService {
     const user = await this.usersService.findOneByPhoneNumber(
       loginPayload.phoneNumber,
     );
-    console.log(user);
     if (user && (await bcrypt.compare(loginPayload.password, user.password))) {
       (await this.otpService.generateOTP(user)) ? true : false;
       return user;

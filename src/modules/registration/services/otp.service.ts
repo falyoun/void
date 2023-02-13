@@ -18,6 +18,8 @@ export class OTPService {
     const accountSid = useTwilio.accountSid;
     const authToken = useTwilio.authToken;
     this.senderPhoneNumber = useTwilio.phoneNumber;
+console.log(accountSid)
+console.log(authToken)
 
     this.twilioClient = new Twilio(accountSid, authToken);
   }
@@ -65,11 +67,11 @@ export class OTPService {
   }
 
   async sendMessage(receiverPhoneNumber: string, message: string) {
-    // const r = await this.twilioService.client.messages.create({
-    //   body: message,
-    //   from: senderPhoneNumber,
-    //   to: receiverPhoneNumber,
-    //  });
+     const r = await this.twilioService.client.messages.create({
+       body: message,
+       from: this.senderPhoneNumber,
+       to: receiverPhoneNumber,
+      });
 
     return await this.twilioClient.messages.create({
       body: message,

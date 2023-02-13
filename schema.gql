@@ -8,56 +8,27 @@ type Device {
   IMEI: String!
   id: String!
   name: String!
-input CreateUserPayload {
-  email: String!
-  firstName: String!
-  lastName: String!
-  password: String!
-  phoneNumber: String!
 }
 
 input LoginPayload {
   password: String!
   phoneNumber: String!
-  phoneNumber: String!
 }
 
 type Mutation {
-  getNewTokens: SignResponse!
   deleteDevice: Boolean!
   device: Device!
-  updateDevice: Device!
   getNewTokens: SignResponse!
   login(payload: LoginPayload!): User!
-  user(payload: CreateUserPayload!): User!
+  updateDevice: Device!
   verifyOTP(payload: VerificationPayload!): SignResponse!
 }
 
 type Query {
-  hello: String!
-  hello2: String!
-}
-
-"""Role"""
-type Role {
-  id: ID!
-  name: String!
-}
-
-type SignResponse {
-  accessToken: String!
-  refreshToken: String!
-  user: User!
   deviceById: Device!
   devices: [Device!]!
   hello: String!
   hello2: String!
-}
-
-"""Role"""
-type Role {
-  id: ID!
-  name: String!
 }
 
 type SignResponse {
@@ -72,7 +43,6 @@ type User {
   firstName: String!
   lastName: String!
   phoneNumber: String!
-  roles: [Role!]!
 }
 
 input VerificationPayload {
