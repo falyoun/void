@@ -10,7 +10,7 @@ const EnvConfig = {
   uat: generateAppConfigFactory('../config/uat.yaml'),
 };
 const config = {
-  ...EnvConfig[process.env.NODE_ENV || 'development'](),
+  ...EnvConfig[/*process.env.NODE_ENV || */ 'development'](),
 };
 let commandLineConfig = {};
 if (process.env.NODE_CONFIG) {

@@ -8,15 +8,58 @@ type Device {
   IMEI: String!
   id: String!
   name: String!
+input CreateUserPayload {
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+  phoneNumber: String!
+}
+
+input LoginPayload {
+  password: String!
+  phoneNumber: String!
 }
 
 type Mutation {
   deleteDevice: Boolean!
   device: Device!
   updateDevice: Device!
+  getNewTokens: SignResponse!
+  login(payload: LoginPayload!): User!
+  user(payload: CreateUserPayload!): User!
+  verifyOTP(payload: VerificationPayload!): SignResponse!
 }
 
 type Query {
   deviceById: Device!
   devices: [Device!]!
+  hello: String!
+  hello2: String!
+}
+
+"""Role"""
+type Role {
+  id: ID!
+  name: String!
+}
+
+type SignResponse {
+  accessToken: String!
+  refreshToken: String!
+  user: User!
+}
+
+"""User"""
+type User {
+  email: String!
+  firstName: String!
+  lastName: String!
+  phoneNumber: String!
+  roles: [Role!]!
+}
+
+input VerificationPayload {
+  otp: String!
+  phoneNumber: String!
 }
