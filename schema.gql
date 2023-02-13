@@ -19,9 +19,11 @@ input CreateUserPayload {
 input LoginPayload {
   password: String!
   phoneNumber: String!
+  phoneNumber: String!
 }
 
 type Mutation {
+  getNewTokens: SignResponse!
   deleteDevice: Boolean!
   device: Device!
   updateDevice: Device!
@@ -32,6 +34,20 @@ type Mutation {
 }
 
 type Query {
+  hello: String!
+  hello2: String!
+}
+
+"""Role"""
+type Role {
+  id: ID!
+  name: String!
+}
+
+type SignResponse {
+  accessToken: String!
+  refreshToken: String!
+  user: User!
   deviceById: Device!
   devices: [Device!]!
   hello: String!
