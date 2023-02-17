@@ -15,7 +15,7 @@ export class LoginService {
     private readonly tokenService: TokensService,
   ) {}
   async login(loginPayload: LoginPayload) {
-    const user = await this.usersService.findOneByPhoneNumber(
+    const user = await this.usersService.findOneOrThrow(
       loginPayload.phoneNumber,
     );
     if (user && (await bcrypt.compare(loginPayload.password, user.password))) {
@@ -28,7 +28,7 @@ export class LoginService {
 
   // verify otp
   async verifyOTP(request: VerificationPayload) {
-    const user = await this.usersService.findOneByPhoneNumber(
+    const user = await this.usersService.findOneOrThrow(
       request.phoneNumber,
     );
 
@@ -44,6 +44,7 @@ export class LoginService {
       lastName: user.lastName,
       firstName: user.firstName,
       phoneNumber: user.phoneNumber,
+      role:user.role.name
     };
     const accessToken = await this.tokenService.generateAccessToken(payload);
     const refreshToken = await this.tokenService.generateRefreshToken(payload);

@@ -14,9 +14,9 @@ export class UsersService {
   }
 
   // find user by phoneNumber and validate password
-  async findOneByPhoneNumber(phoneNumber: string) {
-    const user = await this.prismaService.user.findUnique({
-      where: { phoneNumber },
+  async findOneOrThrow(data: any) {
+    const user = await this.prismaService.user.findFirst({
+      where: { OR: [{ phoneNumber:data }, { id: data }] },
       include: { role: true },
     });
     if (!user || user.deletedAt) {
@@ -24,15 +24,5 @@ export class UsersService {
     }
     return user;
   }
-  // find user by id
-  async findOneById(id: string) {
-    const user = await this.prismaService.user.findUnique({
-      where: { id },
-      include: { role: true },
-    });
-    if (!user || user.deletedAt) {
-      throw new ResourceNotFoundException('User not found');
-    }
-    return user;
-  }
+
 }

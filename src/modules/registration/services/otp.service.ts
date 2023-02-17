@@ -18,8 +18,6 @@ export class OTPService {
     const accountSid = useTwilio.accountSid;
     const authToken = useTwilio.authToken;
     this.senderPhoneNumber = useTwilio.phoneNumber;
-console.log(accountSid)
-console.log(authToken)
 
     this.twilioClient = new Twilio(accountSid, authToken);
   }

@@ -1,6 +1,7 @@
 import {
   ExecutionContext,
   Injectable,
+  Logger,
   UnauthorizedException,
 } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
@@ -9,6 +10,8 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class JwtGuard extends AuthGuard('jwt') {
+  private logger: Logger = new Logger('JwtGuard');
+
   getRequest(context: ExecutionContext) {
     const ctx = GqlExecutionContext.create(context);
     return ctx.getContext().req;
@@ -23,7 +26,7 @@ export class JwtGuard extends AuthGuard('jwt') {
   handleRequest(err, user, info) {
     // check if it is public route
     // You can throw an exception based on either "info" or "err" arguments
-    console.log('err');
+    this.logger.error(err);
     if (err || !user) {
       throw err || new UnauthorizedException(`${info}`);
     }

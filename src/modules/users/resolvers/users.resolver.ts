@@ -1,6 +1,5 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { User } from '@app/modules/users/models/user.model';
-//import { QueryUsersArgsDto } from '@app/modules/users/queries-types/query-users-args.dto';
 import { UsersService } from '@app/modules/users/services/users.service';
 import { CreateUserPayload } from '@app/modules/users/payloads/create-user.payload';
 

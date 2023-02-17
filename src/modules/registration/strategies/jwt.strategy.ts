@@ -22,12 +22,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     private readonly configService: ConfigService<IAppConfig>,
     private readonly userService: UsersService,
   ) {
-    console.log('JwtStrategy');
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       secretOrKey:
         configService.get<IAuthentication>('authentication').privateKey,
-      //    ignoreExpiration: configService.get<boolean>('IGNORE_EXPIRATION'),
       issuer: configService.get<IAuthentication>('authentication').issuer,
       algorithms: ['RS256'],
       passReqToCallback: true,
@@ -36,10 +34,9 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   async validate(req, payload: JwtPayload) {
     try {
-      console.log('validate');
       const { id } = payload;
 
-      const user = await this.userService.findOneById(id);
+      const user = await this.userService.findOneOrThrow(id);
 
       if (!user || user.passwordChangedAt > new Date()) {
         throw new UnauthorizedException('invalid access token');

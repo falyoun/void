@@ -9,10 +9,10 @@ export class UserSeeder {
     const users = {
         firstName: 'Sabah',
         lastName: 'Assi',
-        email: 'email@email.com',
+        email: 'admin@void.com',
         password: hashedPassword,
         phoneNumber: '123456789',
-        isActivated: true,
+        isActive: true,
         role:{
           create:{
             name: Role.ADMIN,

@@ -30,7 +30,6 @@ export class JwtRefreshTokenStrategy extends PassportStrategy(
       ]),
       secretOrKey:
         configService.get<IAuthentication>('authentication').publicKey,
-      //  ignoreExpiration: configService.get<boolean>('IGNORE_EXPIRATION'),
       issuer: configService.get<IAuthentication>('authentication').issuer,
       algorithms: ['RS256'],
       passReqToCallback: true,
@@ -44,12 +43,18 @@ export class JwtRefreshTokenStrategy extends PassportStrategy(
       throw new UnauthorizedException('refresh Token expired!');
     }
 
-    const user = await this.userService.findOneById(id);
+    const user = await this.userService.findOneOrThrow(id);
 
     if (!user || user.passwordChangedAt > new Date()) {
       throw new UnauthorizedException('invalid refresh token');
     }
-    const tokens = await this.tokenService.generateTokens(user);
+    const tokens = await this.tokenService.generateTokens({
+      id: user.id,
+      lastName: user.lastName,
+      firstName: user.firstName,
+      phoneNumber: user.phoneNumber,
+      role: user.role.name,
+    });
     return { user, ...tokens };
   }
 }

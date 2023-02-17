@@ -4,5 +4,6 @@ export interface JwtPayload {
     lastName: string;
     phoneNumber: string;
     expiration?: any;
+    role?: string;
   }
   
