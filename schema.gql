@@ -11,17 +11,22 @@ type Device {
 }
 
 input LoginPayload {
+  email: String!
   password: String!
-  phoneNumber: String!
 }
 
 type Mutation {
+  OtpLogin(payload: OtpLoginPayload!): Boolean!
   deleteDevice: Boolean!
   device: Device!
   getNewTokens: SignResponse!
-  login(payload: LoginPayload!): User!
+  login(payload: LoginPayload!): SignResponse!
   updateDevice: Device!
   verifyOTP(payload: VerificationPayload!): SignResponse!
+}
+
+input OtpLoginPayload {
+  phoneNumber: String!
 }
 
 type Query {
