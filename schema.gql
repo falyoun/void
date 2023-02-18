@@ -10,13 +10,42 @@ type Device {
   name: String!
 }
 
+input LoginPayload {
+  password: String!
+  phoneNumber: String!
+}
+
 type Mutation {
   deleteDevice: Boolean!
   device: Device!
+  getNewTokens: SignResponse!
+  login(payload: LoginPayload!): User!
   updateDevice: Device!
+  verifyOTP(payload: VerificationPayload!): SignResponse!
 }
 
 type Query {
   deviceById: Device!
   devices: [Device!]!
+  hello: String!
+  hello2: String!
+}
+
+type SignResponse {
+  accessToken: String!
+  refreshToken: String!
+  user: User!
+}
+
+"""User"""
+type User {
+  email: String!
+  firstName: String!
+  lastName: String!
+  phoneNumber: String!
+}
+
+input VerificationPayload {
+  otp: String!
+  phoneNumber: String!
 }

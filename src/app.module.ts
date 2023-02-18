@@ -12,6 +12,7 @@ import { AvlPacketModule } from '@app/modules/avl-packets/avl-packet.module';
 import { GeofenceModule } from '@app/modules/geofence/geofence.module';
 import { TripsModule } from '@app/modules/trips/trips.module';
 import { LivePreviewModule } from '@app/modules/live-preview/live-preview.module';
+import { RegistrationModule } from './modules/registration/registration.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { LivePreviewModule } from '@app/modules/live-preview/live-preview.module
     LivePreviewModule,
     SocketServerModule,
     GeofenceModule,
+    RegistrationModule
   ],
   controllers: [AppDefaultController],
 })

@@ -47,7 +47,7 @@ model User {
   lastName          String    @map("last_ame")
   password          String
   passwordChangedAt DateTime  @default(now()) @map("password_changed_at")
-  isAivated         Boolean   @default(false) @map("is_activated")
+  isActive        Boolean   @default(false) @map("isActive")
   createdAt         DateTime  @default(now()) @map("created_at")
   updatedAt         DateTime  @updatedAt @map("updated_at")
   deletedAt         DateTime? @map("deleted_at")
@@ -214,35 +214,35 @@ model AVLData {
 }
 
 model GPSElement {
-  id        String    @id @default(uuid())
-  avlDataId String    @map("avl_data_id")
-  latitude  Float
-  longitude Float
-  altitude Float
-  angle Float
+  id         String    @id @default(uuid())
+  avlDataId  String    @map("avl_data_id")
+  latitude   Float
+  longitude  Float
+  altitude   Float
+  angle      Float
   satellites Float
-  speed Float
-  createdAt DateTime  @default(now()) @map("created_at")
-  updatedAt DateTime  @updatedAt @map("updated_at")
-  deletedAt DateTime? @map("deleted_at")
+  speed      Float
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime  @updatedAt @map("updated_at")
+  deletedAt  DateTime? @map("deleted_at")
 
   avlData AVLData @relation(fields: [avlDataId], references: [id], onDelete: Cascade)
 }
 
 model IOElement {
-  id        String    @id @default(uuid())
-  avlDataId String    @map("avl_data_id")
-  ioType    String    @map("io_type")
-  ioValue   Float    @map("io_value")
-  lable     String
-  dimension String
-  valueHuman String @map("value_human")
-  createdAt DateTime  @default(now()) @map("created_at")
-  updatedAt DateTime  @updatedAt @map("updated_at")
-  deletedAt DateTime? @map("deleted_at")
-  avlData AVLData @relation(fields: [avlDataId], references: [id], onDelete: Cascade)
-
+  id         String    @id @default(uuid())
+  avlDataId  String    @map("avl_data_id")
+  ioType     String    @map("io_type")
+  ioValue    Float     @map("io_value")
+  lable      String
+  dimension  String
+  valueHuman String    @map("value_human")
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime  @updatedAt @map("updated_at")
+  deletedAt  DateTime? @map("deleted_at")
+  avlData    AVLData   @relation(fields: [avlDataId], references: [id], onDelete: Cascade)
 }
+
 // otp table
 model OTP {
   id        String    @id @default(uuid())

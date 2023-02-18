@@ -8,7 +8,6 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
   constructor(private configService: ConfigService<IAppConfig>) {
     const userPrisma = configService.get<IPrisma>('usePrisma');
     const url = `${userPrisma.connecter}://${userPrisma.user}:${userPrisma.password}@${userPrisma.host}:${userPrisma.port}/${userPrisma.database}?schema=${userPrisma.schema}`;
-    console.log({ url });
     super({
       datasources: {
         db: {
