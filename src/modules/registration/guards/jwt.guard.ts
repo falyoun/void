@@ -7,9 +7,10 @@ import {
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthGuard } from '@nestjs/passport';
 import { Observable } from 'rxjs';
+import { STRATEGY } from './strategy.enum';
 
 @Injectable()
-export class JwtGuard extends AuthGuard('jwt') {
+export class JwtGuard extends AuthGuard(STRATEGY.JWT) {
   private logger: Logger = new Logger('JwtGuard');
 
   getRequest(context: ExecutionContext) {

@@ -5,8 +5,9 @@ import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 export class LoginPayload {
   @Field()
   @IsString()
-  @IsNotEmpty({ message: 'Please enter phoneNumber.' })
-  phoneNumber: string;
+  @IsNotEmpty({ message: 'Please enter email.' })
+  @IsEmail()
+  email: string;
 
   @Field()
   @IsString()

@@ -16,7 +16,7 @@ export class UsersService {
   // find user by phoneNumber and validate password
   async findOneOrThrow(data: any) {
     const user = await this.prismaService.user.findFirst({
-      where: { OR: [{ phoneNumber:data }, { id: data }] },
+      where: { OR: [{ phoneNumber:data },{ email:data },  { id: data }] },
       include: { role: true },
     });
     if (!user || user.deletedAt) {
