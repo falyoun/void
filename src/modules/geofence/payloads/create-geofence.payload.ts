@@ -20,7 +20,7 @@ export enum GeofenceTypeEnum {
   RECTANGLE = 'rectangle',
 }
 
-export class GeofenceLocationOnlyDto {
+export class GeofenceLocationOnlyPayload {
   @IsEnum(GeofenceTypeEnum)
   @ApiProperty()
   shapeType: string;
@@ -58,7 +58,7 @@ export class GeofenceLocationOnlyDto {
   y2?: number;
 }
 
-export class OtherGeofencePropsDto {
+export class OtherGeofencePropsPayload {
   @IsString()
   @ApiProperty()
   name: string;
@@ -73,7 +73,7 @@ export class OtherGeofencePropsDto {
   deviceId: string;
 }
 
-export class CreateGeofenceDto extends IntersectionType(
-  OtherGeofencePropsDto,
-  GeofenceLocationOnlyDto,
+export class CreateGeofencePayload extends IntersectionType(
+  OtherGeofencePropsPayload,
+  GeofenceLocationOnlyPayload,
 ) {}

@@ -1,5 +1,5 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
-import { CreateGeofenceEventDto } from './dto/create-event.dto';
+import { CreateGeofenceEventPayload } from './payloads/create-event.payload';
 import { GeofenceService } from './geofence.service';
 import { GeofenceEvent } from './models/geofence-event.model';
 
@@ -9,5 +9,5 @@ export class GeofenceEventService {
     @Inject(forwardRef(() => GeofenceService))
     private geofenceService: GeofenceService,
   ) {}
-  public async create(dtos: CreateGeofenceEventDto[]) {}
+  public async create(payloads: CreateGeofenceEventPayload[]) {}
 }

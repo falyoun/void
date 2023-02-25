@@ -12,7 +12,7 @@ import {
 } from '../enums';
 import { Device } from '@app/modules/devices/models/device.model';
 
-export class CreateIoElementPacketDto {
+export class CreateIoElementPacketPayload {
   Din1: string;
   SDStatus: string;
   fuelUsedGPS: string;

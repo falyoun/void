@@ -1,23 +1,23 @@
 import { ApiOkResponse, ApiProperty, getSchemaPath } from '@nestjs/swagger';
 import { applyDecorators, Type } from '@nestjs/common';
 
-export class PaginatedDto<T> {
+export class PaginatedPayload<T> {
   @ApiProperty()
   count: number;
   @ApiProperty()
   data: T[];
 }
-export class RiaDto<T> {
+export class RiaPayload<T> {
   @ApiProperty()
   data: T;
 }
 
-export const ApiRiaDto = <TModel extends Type<any>>(model: TModel) => {
+export const ApiRiaPayload = <TModel extends Type<any>>(model: TModel) => {
   return applyDecorators(
     ApiOkResponse({
       schema: {
         allOf: [
-          { $ref: getSchemaPath(RiaDto) },
+          { $ref: getSchemaPath(RiaPayload) },
           {
             properties: {
               data: { $ref: getSchemaPath(model) },
@@ -29,12 +29,12 @@ export const ApiRiaDto = <TModel extends Type<any>>(model: TModel) => {
   );
 };
 
-export const ApiPaginatedDto = <TModel extends Type<any>>(model: TModel) => {
+export const ApiPaginatedPayload = <TModel extends Type<any>>(model: TModel) => {
   return applyDecorators(
     ApiOkResponse({
       schema: {
         allOf: [
-          { $ref: getSchemaPath(PaginatedDto) },
+          { $ref: getSchemaPath(PaginatedPayload) },
           {
             properties: {
               data: {

@@ -8,7 +8,7 @@ import {
 import { Expose, Type } from 'class-transformer';
 
 export type ReportsType = 'consolidated' | 'detailedTrip' | 'location';
-export class GenerateReportDto {
+export class GenerateReportPayload {
   @Expose()
   @IsNotEmpty()
   @IsIn(['consolidated', 'detailedTrip', 'location'] as ReportsType[])

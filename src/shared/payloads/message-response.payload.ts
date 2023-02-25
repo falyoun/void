@@ -1,6 +1,6 @@
 import { IsString } from 'class-validator';
 
-export class MessageResponseDto {
+export class MessageResponsePayload {
   @IsString()
   message: string;
 }

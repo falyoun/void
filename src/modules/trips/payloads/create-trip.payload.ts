@@ -10,7 +10,7 @@ export type TripStep = {
   carStatus: CarStatus;
 };
 
-export class CreateTripDto {
+export class CreateTripPayload {
   @Expose()
   @Allow()
   steps: TripStep[];

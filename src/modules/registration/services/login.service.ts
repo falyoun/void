@@ -7,6 +7,7 @@ import { VerificationPayload } from '../payloads/verification.payload';
 import { JwtPayload } from '../payloads/jwt.payload';
 import { TokensService } from './tokens.service';
 import { OtpLoginPayload } from '../payloads/otp-login.payload';
+import { Role } from '@prisma/client';
 
 @Injectable()
 export class LoginService {
@@ -17,13 +18,14 @@ export class LoginService {
   ) {}
   async login(loginPayload: LoginPayload) {
     const user = await this.usersService.findOneOrThrow(loginPayload.email);
+
     if (user && (await bcrypt.compare(loginPayload.password, user.password))) {
       const payload: JwtPayload = {
         id: user.id,
         lastName: user.lastName,
         firstName: user.firstName,
         phoneNumber: user.phoneNumber,
-        role: user.role.name,
+        role: user.role ? user.role.name : 'guest',
       };
       return await this.getNewTokens(payload);
     } else {

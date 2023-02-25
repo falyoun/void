@@ -6,7 +6,7 @@ import {
   IsString,
 } from 'class-validator';
 
-export class CreateVehicleDto {
+export class CreateVehiclePayload {
   @Expose()
   @IsNotEmpty()
   company: string;

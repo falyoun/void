@@ -1,4 +1,4 @@
-import { GeofenceTypeEnum } from '@app/modules/geofence/dto/create-geofence.dto';
+import { GeofenceTypeEnum } from '@app/modules/geofence/payloads/create-geofence.payload';
 
 export class Geofence {
   _id: string;

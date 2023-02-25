@@ -2,7 +2,6 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { LoginPayload } from '@app/modules/registration/payloads/login.payload';
 import { User } from '@app/modules/users/models/user.model';
 import { LoginService } from '../services/login.service';
-import { SignResponse } from '../dto/sign-reponse';
 import { VerificationPayload } from '../payloads/verification.payload';
 import { UseGuards } from '@nestjs/common';
 import { JwtGuard } from '../guards/jwt.guard';
@@ -11,11 +10,12 @@ import { JwtRefreshGuard } from '../guards/jwt-refresh.guard';
 import { RoleGuard } from '../guards/role.guard';
 import { Role } from '@prisma/client';
 import { OtpLoginPayload } from '../payloads/otp-login.payload';
+import { SignResponsePayload } from '../payloads/sign-response.payload';
 @Resolver()
 export class LoginResolver {
   constructor(private readonly loginService: LoginService) {}
 
-  @Mutation(() => SignResponse)
+  @Mutation(() => SignResponsePayload)
   login(@Args('payload') request: LoginPayload) {
     return this.loginService.login(request);
   }
@@ -26,7 +26,7 @@ export class LoginResolver {
   }
 
   // verify otp
-  @Mutation(() => SignResponse)
+  @Mutation(() => SignResponsePayload)
   verifyOTP(@Args('payload') request: VerificationPayload) {
     return this.loginService.verifyOTP(request);
   }
@@ -44,7 +44,7 @@ export class LoginResolver {
     return 'hello world';
   }
   @UseGuards(JwtRefreshGuard)
-  @Mutation(() => SignResponse)
+  @Mutation(() => SignResponsePayload)
   getNewTokens(@GetUser() user) {
     return user;
   }

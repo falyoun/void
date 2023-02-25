@@ -1,4 +1,4 @@
-import { TripStep } from '@app/modules/trips/dtos/create-trip.dto';
+import { TripStep } from '@app/modules/trips/payloads/create-trip.payload';
 import { Device } from '@app/modules/devices/models/device.model';
 
 export class Trip {

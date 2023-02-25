@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { LivePreviewDto } from './dto/live-preview.dto';
+import { LivePreviewPayload } from './payloads/live-preview.payload';
 
 @Injectable()
 export class LivePreviewService {
-  public async broadcastData(data: LivePreviewDto) {
+  public async broadcastData(data: LivePreviewPayload) {
     // handle live preview data
   }
 }

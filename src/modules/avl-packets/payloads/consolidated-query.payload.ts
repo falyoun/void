@@ -1,7 +1,7 @@
 import { IsDate } from 'class-validator';
 import { Expose, Transform } from 'class-transformer';
 
-export class ConsolidatedQueryDto {
+export class ConsolidatedQueryPayload {
   @Expose()
   @Transform(({ value }) => new Date(value))
   @IsDate()

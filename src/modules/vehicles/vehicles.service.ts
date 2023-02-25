@@ -3,8 +3,8 @@ import { Vehicle } from './models/vehicles.model';
 import { TripsService } from '@app/modules/trips/trips.service';
 import { DriversService } from '@app/modules/drivers/drivers.service';
 import { DevicesService } from '@app/modules/devices/services/devices.service';
-import { UpdateVehicleDto } from '@app/modules/vehicles/dtos/update-vehicle.dto';
-import { CreateVehicleDto } from '@app/modules/vehicles/dtos/create-vehicle.dto';
+import { UpdateVehiclePayload } from '@app/modules/vehicles/payloads/update-vehicle.payload';
+import { CreateVehiclePayload } from '@app/modules/vehicles/payloads/create-vehicle.payload';
 
 @Injectable()
 export class VehiclesService {
@@ -17,13 +17,13 @@ export class VehiclesService {
 
   findOne() {}
 
-  async findAllWithTrips(collectionDto: any) {}
+  async findAllWithTrips(collectionPayload: any) {}
 
-  findAll(collectionDto: any) {}
+  findAll(collectionPayload: any) {}
 
-  createOne(dto: CreateVehicleDto) {}
+  createOne(payload: CreateVehiclePayload) {}
 
-  updateOne(dto: UpdateVehicleDto) {}
+  updateOne(payload: UpdateVehiclePayload) {}
 
   removeOne() {}
 }
