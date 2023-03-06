@@ -4,13 +4,13 @@ import {
   Inject,
   Injectable,
 } from '@nestjs/common';
-import { GenerateReportDto } from './dtos/generate-report.dto';
+import { GenerateReportPayload } from './payloads/generate-report.payload';
 import { readFileSync } from 'fs';
 import HandleBars from 'handlebars';
 import { join } from 'path';
-import { GetTripsDto } from './dtos/get-trips.dto';
+import { GetTripsPayload } from './payloads/get-trips.payload';
 import { Trip } from '@app/modules/trips/models/trip.model';
-import { CreateTripDto } from '@app/modules/trips/dtos/create-trip.dto';
+import { CreateTripPayload } from '@app/modules/trips/payloads/create-trip.payload';
 import { AvlPacketsService } from '@app/modules/avl-packets/avl-packets.service';
 import { metersToDistance } from '@app/shared/utils/meters-to-distance';
 import { VehiclesService } from '@app/modules/vehicles/vehicles.service';
@@ -56,8 +56,8 @@ export class TripsService {
     private readonly avlPacketsServices: AvlPacketsService,
   ) {}
 
-  createTrip(createTripDto: CreateTripDto) {
-    // return this.tripDocument.create(createTripDto);
+  createTrip(createTripPayload: CreateTripPayload) {
+    // return this.tripDocument.create(createTripPayload);
   }
 
   async getLatestTrip(deviceId: string) {}
@@ -68,9 +68,9 @@ export class TripsService {
     fromDate,
     toDate,
     interval = 30,
-  }: GenerateReportDto) {}
+  }: GenerateReportPayload) {}
 
-  public findAll(dto: GetTripsDto, companyFilter: any) {}
+  public findAll(payload: GetTripsPayload, companyFilter: any) {}
 
   public findOne(tripId: string, companyFilter: any) {}
 }

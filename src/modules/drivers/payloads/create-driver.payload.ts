@@ -1,3 +1,4 @@
+import { Expose } from 'class-transformer';
 import { Field, InputType } from '@nestjs/graphql';
 import {
   IsEmail,
@@ -9,7 +10,7 @@ import {
 } from 'class-validator';
 
 @InputType()
-export class CreateUserPayload {
+export class CreateDriverPayload {
   @Field()
   @IsEmail()
   @IsNotEmpty()

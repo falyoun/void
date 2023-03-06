@@ -1,10 +1,10 @@
 export const RiaUtils = {
   applyPagination: <TAttribute = any>(
     findOptions: any,
-    paginationDto?: any,
+    paginationPayload?: any,
   ) => {
-    if (paginationDto && Object.keys(paginationDto).length > 0) {
-      const { page, limit } = paginationDto;
+    if (paginationPayload && Object.keys(paginationPayload).length > 0) {
+      const { page, limit } = paginationPayload;
       const shiftedPage = page === 0 ? 1 : page;
       const limitValue = limit === 0 ? 1 : limit;
       const offset = (shiftedPage - 1) * limitValue;

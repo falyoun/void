@@ -1,5 +1,5 @@
 import geofenceConfigMap from './config';
-import { GeofenceTypeEnum } from '@app/modules/geofence/dto/create-geofence.dto';
+import { GeofenceTypeEnum } from '@app/modules/geofence/payloads/create-geofence.payload';
 import { SetParameterData } from '@app/sockets/types';
 import { Geofence } from '@app/modules/geofence/models/geofence.model';
 

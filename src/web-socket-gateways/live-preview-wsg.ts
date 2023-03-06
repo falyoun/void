@@ -11,7 +11,7 @@ import {
 import { Server, Socket, ServerOptions } from 'socket.io';
 import { Logger } from '@nestjs/common';
 import { LivePreviewDataModel } from './live-preview-data.model';
-import { CreateGeofenceEventDto } from '@app/modules/geofence/dto/create-event.dto';
+import { CreateGeofenceEventPayload } from '@app/modules/geofence/payloads/create-event.payload';
 
 @WebSocketGateway({
   // cors: {
@@ -55,7 +55,7 @@ export class LivePreviewWsg
     this.server.sockets.emit('gps-data', data);
   }
 
-  sendGeofenceEvent(data: CreateGeofenceEventDto) {
+  sendGeofenceEvent(data: CreateGeofenceEventPayload) {
     console.log(data);
     this.server.sockets.emit('geofence-data', data);
   }

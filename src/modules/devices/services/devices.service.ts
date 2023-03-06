@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { CreateDeviceDto } from '@app/modules/devices/dtos/create-device.dto';
-import { UpdateDeviceDto } from '@app/modules/devices/dtos/update-device.dto';
+import { CreateDevicePayload } from '@app/modules/devices/payloads/create-device.payload';
+import { UpdateDevicePayload } from '@app/modules/devices/payloads/update-device.payload';
 import { PrismaService } from '@app/app-prisma/prisma.service';
 
 @Injectable()
@@ -9,13 +9,13 @@ export class DevicesService {
 
   findOne(filterQuery: any) {}
 
-  findAll(collectionDto: any) {}
+  findAll(collectionPayload: any) {}
 
-  createOne(dto: CreateDeviceDto) {
-    return this.prismaService.device.create({ data: dto });
+  createOne(payload: CreateDevicePayload) {
+    return this.prismaService.device.create({ data: payload });
   }
 
-  updateOne(filter: any, dto: UpdateDeviceDto) {}
+  updateOne(filter: any, payload: UpdateDevicePayload) {}
 
   removeOne(filter: any) {}
 

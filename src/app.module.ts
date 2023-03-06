@@ -28,7 +28,8 @@ import { RegistrationModule } from './modules/registration/registration.module';
     LivePreviewModule,
     SocketServerModule,
     GeofenceModule,
-    RegistrationModule
+    RegistrationModule,
+    UsersModule
   ],
   controllers: [AppDefaultController],
 })

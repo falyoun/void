@@ -1,8 +1,8 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
-import { CreateGeofenceDto } from './dto/create-geofence.dto';
-import { FindGeofenceDto } from './dto/find-geofence.dto';
-import { GetEventsDto } from './dto/get-events.dto';
-import { UpdateGeofenceDto } from './dto/update-geofence.dto';
+import { CreateGeofencePayload } from './payloads/create-geofence.payload';
+import { FindGeofencePayload } from './payloads/find-geofence.payload';
+import { GetEventsPayload } from './payloads/get-events.payload';
+import { UpdateGeofencePayload } from './payloads/update-geofence.payload';
 import { ConnectionPool } from '@app/sockets/connection-pool';
 import { DeviceConnection } from '@app/sockets/connection';
 import { DevicesService } from '@app/modules/devices/services/devices.service';
@@ -15,13 +15,13 @@ export class GeofenceService {
     private readonly connectionPool: ConnectionPool,
   ) {}
 
-  public async findAll(dto: FindGeofenceDto, companyFilter: any) {}
+  public async findAll(payload: FindGeofencePayload, companyFilter: any) {}
 
   public async findOne(id: string, companyFilter: any) {}
 
-  public async create(data: CreateGeofenceDto, companyFilter: any) {}
+  public async create(data: CreateGeofencePayload, companyFilter: any) {}
 
-  public async update(id: string, data: UpdateGeofenceDto) {}
+  public async update(id: string, data: UpdateGeofencePayload) {}
 
   private static getConnectionOrFail(deviceId: string): DeviceConnection {
     return null;
@@ -29,5 +29,5 @@ export class GeofenceService {
 
   public async delete(id: string, companyFilter: any) {}
 
-  public async findEvents(dto: GetEventsDto, companyFilter: any) {}
+  public async findEvents(payload: GetEventsPayload, companyFilter: any) {}
 }

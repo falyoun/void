@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { AvlPacket } from '@app/modules/avl-packets/models/avl-packet.model';
-import { CreateAvlDataDto } from '@app/modules/avl-packets/dtos/create-avl-data-collection.dto';
-import { ConsolidatedQueryDto } from '@app/modules/avl-packets/dtos/consolidated-query.dto';
+import { CreateAvlDataPayload } from '@app/modules/avl-packets/payloads/create-avl-data-collection.payload';
+import { ConsolidatedQueryPayload } from '@app/modules/avl-packets/payloads/consolidated-query.payload';
 
 @Injectable()
 export class AvlPacketsService {
@@ -10,10 +10,10 @@ export class AvlPacketsService {
   ) {}
 
   findOne(filterQuery: any) {}
-  async findAll(collectionDto: any) {}
-  async createAvlPacket(createAvlDataDto: CreateAvlDataDto) {}
+  async findAll(collectionPayload: any) {}
+  async createAvlPacket(createAvlDataPayload: CreateAvlDataPayload) {}
 
   deleteOne(filterQuery: any) {}
 
-  getConsolidatedReportObject(consolidatedQuery: ConsolidatedQueryDto) {}
+  getConsolidatedReportObject(consolidatedQuery: ConsolidatedQueryPayload) {}
 }
